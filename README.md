@@ -1,0 +1,27 @@
+<div align="center">
+	<img src="https://gitee.com/zj-prism/data-pulse/raw/master/src/main/resources/imgs/主LOGO.png" width="30%">
+</div>
+
+<h2 align="center" style="color:#009688;font-weight: 800">DataPulse - 1.0.0-beta</h2>
+
+<p align="center">
+	<strong>数据脉搏 轻量级binlog同步平台</strong>
+</p>
+
+
+### 📚简介
+`data-pulse` 是一个轻量级的数据同步平台，提供了开箱即用的数据同步服务，基于`binlog4j`开源组件+国产纯血轻量级java框架 `solon`开发，旨在以最小的资源开销，完成数据同步任务。
+    
+### 🍬特点
+1. 轻量：基于`binlog4j`开源组件+国产纯血轻量级java框架 `solon`开发，资源开销极小。
+2. 高可用：支持集群模式，断点续传。
+2. 简单：配置简单，无需编写代码，即可完成数据同步任务。
+3. 易扩展： 支持多种数据源，如mysql、oracle、sqlserver、postgresql等，用户只需要编写对应的目标库的方言即可实现数据同步。
+
+### 🚀开发计划
+1. 2024.07-09 v1.0.0 mysql-->es   mysql-->mysql    mysql-->clickhouse
+    搭建基本框架，binlog数据订阅并同步，全量数据同步
+2. 2024.09-12 v1.5
+    开始规划用户管理界面，实现用户管理功能，用户可以自定义同步任务，并管理任务状态，任务日志，任务配置等。
+3. 2025.01-01 v2.0
+    持续迭代，持续优化，持续完善，持续更新。

@@ -1,0 +1,165 @@
+{
+  "mappings": {
+    "properties": {
+      "activeTime": {
+        "type": "date"
+      },
+      "addUpRechargeMoney": {
+        "type": "double"
+      },
+      "address": {
+        "type": "text"
+      },
+      "age": {
+        "type": "long"
+      },
+      "appPackage": {
+        "type": "text"
+      },
+      "city": {
+        "type": "text"
+      },
+      "commodityId": {
+        "type": "long"
+      },
+      "commodityName": {
+        "type": "text"
+      },
+      "county": {
+        "type": "text"
+      },
+      "createTime": {
+        "type": "date"
+      },
+      "creator": {
+        "type": "long"
+      },
+      "deductStatus": {
+        "type": "integer"
+      },
+      "expressCompany": {
+        "type": "text"
+      },
+      "expressNum": {
+        "type": "text"
+      },
+      "id": {
+        "type": "long"
+      },
+      "idCard": {
+        "type": "text"
+      },
+      "merchantEigenValCode": {
+        "type": "text"
+      },
+      "merchantEigenValId": {
+        "type": "long"
+      },
+      "merchantId": {
+        "type": "long"
+      },
+      "merchantUserId": {
+        "type": "long"
+      },
+      "mobile": {
+        "type": "text"
+      },
+      "msg": {
+        "type": "text"
+      },
+      "operatorCode": {
+        "type": "text"
+      },
+      "operatorId": {
+        "type": "long"
+      },
+      "operatorOrderNum": {
+        "type": "text"
+      },
+      "operatorStatus": {
+        "type": "text"
+      },
+      "operatorTag": {
+        "type": "text"
+      },
+      "operatorTagName": {
+        "type": "text"
+      },
+      "orderFlag": {
+        "type": "integer"
+      },
+      "orderId": {
+        "type": "long"
+      },
+      "orderNum": {
+        "type": "text"
+      },
+      "orderSource": {
+        "type": "text"
+      },
+      "orderStatus": {
+        "type": "text"
+      },
+      "orderTime": {
+        "type": "date"
+      },
+      "orderType": {
+        "type": "text"
+      },
+      "outOrderNum": {
+        "type": "text"
+      },
+      "parentCommodityId": {
+        "type": "long"
+      },
+      "parentCommodityName": {
+        "type": "text"
+      },
+      "planId": {
+        "type": "long"
+      },
+      "processUrl": {
+        "type": "text"
+      },
+      "province": {
+        "type": "keyword"
+      },
+      "rechargeMoney": {
+        "type": "double"
+      },
+      "rechargeTag": {
+        "type": "integer"
+      },
+      "sellMobile": {
+        "type": "text"
+      },
+      "shipTime": {
+        "type": "date"
+      },
+      "sourceAddress": {
+        "type": "text"
+      },
+      "transferProcessId": {
+        "type": "text"
+      },
+      "transferRecordId": {
+        "type": "long"
+      },
+      "unsubscribeTime": {
+        "type": "date"
+      },
+      "updateTime": {
+        "type": "date"
+      },
+      "updater": {
+        "type": "long"
+      },
+      "userName": {
+        "type": "text"
+      },
+      "validCode": {
+        "type": "text"
+      }
+    }
+  }
+}

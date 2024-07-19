@@ -1,0 +1,21 @@
+#数据源
+from:
+  one-mysql:
+    type: mysql
+    host: 127.0.0.1
+    port: 3306
+    user: root
+    password: 123456
+    serverId: 1000
+    handle: test.dd_order
+
+
+#目标库
+to:
+  one-es:
+    type: es
+    host: 127.0.0.1
+    port: 9200
+    user: elastic
+    password: elastic
+    to_index: order
