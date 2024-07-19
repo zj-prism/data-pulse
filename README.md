@@ -1,5 +1,5 @@
 <div align="center">
-	<img src="https://gitee.com/zj-prism/data-pulse/raw/master/src/main/resources/imgs/主LOGO.png" width="30%">
+	<img src="https://gitee.com/zj-prism/data-pulse/raw/v1.0-master/src/main/resources/imgs/%E4%B8%BBLOGO.png" width="30%">
 </div>
 
 <h2 align="center" style="color:#009688;font-weight: 800">DataPulse - 1.0.0-beta</h2>
