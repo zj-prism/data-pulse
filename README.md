@@ -6,7 +6,6 @@
 
 <p align="center">
 	<strong>轻量级binlog同步平台</strong>
-[![star](https://gitee.com/zj-prism/data-pulse/badge/star.svg?theme=dark)](https://gitee.com/zj-prism/data-pulse/stargazers)
 </p>
 <div>
 [![star](https://gitee.com/zj-prism/data-pulse/badge/star.svg?theme=dark)](https://gitee.com/zj-prism/data-pulse/stargazers)
