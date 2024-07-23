@@ -2,7 +2,7 @@
 	<img src="https://gitee.com/zj-prism/data-pulse/raw/v1.0-master/src/main/resources/imgs/%E4%B8%BBLOGO.png" width="30%">
 </div>
 
-<h2 align="center" style="color:#009688;font-weight: 800">DataPulse</h2>
+[//]: # (<h2 align="center" style="color:#009688;font-weight: 800">DataPulse</h2>)
 
 <p align="center">
 	<strong>数据脉搏 轻量级binlog同步平台</strong>
