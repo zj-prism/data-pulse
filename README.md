@@ -47,7 +47,7 @@
     持续迭代，持续优化，持续完善，持续更新。
 ### 🔨规划思维导图
 <div align="center">
-    <img src="https://gitee.com/zj-prism/data-pulse/blob/v1.0-master/src/main/resources/imgs/%E9%A1%B9%E7%9B%AE%E8%A7%84%E5%88%92.png">
+    <img src="https://gitee.com/zj-prism/data-pulse/raw/v1.0-master/src/main/resources/imgs/%E9%A1%B9%E7%9B%AE%E8%A7%84%E5%88%92.png">
 </div>
 ### 👥联系我们
 QQ群：`621215734`
