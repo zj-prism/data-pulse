@@ -12,6 +12,10 @@
 	<a target="_blank" href="https://license.coscl.org.cn/MulanPSL2">
 		<img src="https://img.shields.io/:license-MulanPSL2-blue.svg" />
 	</a>
+	</a>
+    <a target="_blank" href="https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html">
+		<img src="https://img.shields.io/badge/JDK-17-green.svg" alt="jdk-17" />
+	</a>
     <a href='https://gitee.com/zj-prism/data-pulse/stargazers'>
         <img src='https://gitee.com/zj-prism/data-pulse/badge/star.svg?theme=dark' alt='star'/>
     </a>
