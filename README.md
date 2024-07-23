@@ -5,7 +5,7 @@
 [//]: # (<h2 align="center" style="color:#009688;font-weight: 800">DataPulse</h2>)
 
 <p align="center">
-	<strong>数据脉搏 轻量级binlog同步平台</strong>
+	<strong>轻量级binlog同步平台</strong>
 </p>
 
 
