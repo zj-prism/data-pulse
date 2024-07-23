@@ -2,14 +2,15 @@
 	<img src="https://gitee.com/zj-prism/data-pulse/raw/v1.0-master/src/main/resources/imgs/%E4%B8%BBLOGO.png" width="30%">
 </div>
 
-[//]: # (<h2 align="center" style="color:#009688;font-weight: 800">DataPulse</h2>)
-
 <p align="center">
 	<strong>轻量级binlog同步平台</strong>
 </p>
-<div style="width: 100%; display: flex; justify-content: center;">
-    <img style="margin: 0px auto" src="https://gitee.com/zj-prism/data-pulse/widgets/widget_6.svg">
-</div>
+
+[//]: # (<div style="width: 100%; display: flex; justify-content: center;">)
+
+[//]: # (    <img style="margin: 0px auto" src="https://gitee.com/zj-prism/data-pulse/widgets/widget_6.svg">)
+
+[//]: # (</div>)
 
 
 ### 📚简介
