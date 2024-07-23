@@ -2,12 +2,15 @@
 	<img src="https://gitee.com/zj-prism/data-pulse/raw/v1.0-master/src/main/resources/imgs/%E4%B8%BBLOGO.png" width="30%">
 </div>
 
-<h2 align="center" style="color:#009688;font-weight: 800">DataPulse - 1.0.0-beta</h2>
+<h2 align="center" style="color:#009688;font-weight: 800">DataPulse</h2>
 
 <p align="center">
 	<strong>数据脉搏 轻量级binlog同步平台</strong>
 </p>
 
+| 版本 | 描述 |
+| :----: | :----: |
+|v1.0-beta|初始版本(开发中)|
 
 ### 📚简介
 `data-pulse` 是一个轻量级的数据同步平台，提供了开箱即用的数据同步服务，基于`binlog4j`开源组件+国产纯血轻量级java框架 `solon`开发，旨在以最小的资源开销，完成数据同步任务。
