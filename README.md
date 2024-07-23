@@ -7,10 +7,8 @@
 <p align="center">
 	<strong>轻量级binlog同步平台</strong>
 </p>
-<div>
-    <img src="https://gitee.com/zj-prism/data-pulse/badge/star.svg?theme=dark">
-
-[//]: # (    [![star]&#40;https://gitee.com/zj-prism/data-pulse/badge/star.svg?theme=dark&#41;]&#40;https://gitee.com/zj-prism/data-pulse/stargazers&#41;)
+<div style="width: 100%; display: flex">
+    <img style="margin: 0px auto" src="https://gitee.com/zj-prism/data-pulse/widgets/widget_6.svg">
 </div>
 
 
