@@ -5,7 +5,7 @@
 <p align="center">
 	<strong>轻量级binlog同步平台</strong>
 </p>
-<p>
+<p align="center">
     <a href='https://gitee.com/zj-prism/data-pulse'>
         <img src='https://gitee.com/zj-prism/data-pulse/widgets/widget_5.svg' width="19px" alt='Fork me on Gitee'/>
     </a>
