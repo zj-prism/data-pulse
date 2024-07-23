@@ -6,8 +6,8 @@
 	<strong>轻量级binlog同步平台</strong>
 </p>
 <p>
-    <a href='https://gitee.com/zj-prism/data-pulse' style="transform: scale(5)">
-        <img src='https://gitee.com/zj-prism/data-pulse/widgets/widget_5.svg' alt='Fork me on Gitee'/>
+    <a href='https://gitee.com/zj-prism/data-pulse'>
+        <img src='https://gitee.com/zj-prism/data-pulse/widgets/widget_5.svg' width="19px" alt='Fork me on Gitee'/>
     </a>
 	<a target="_blank" href="https://license.coscl.org.cn/MulanPSL2">
 		<img src="https://img.shields.io/:license-MulanPSL2-blue.svg" />
