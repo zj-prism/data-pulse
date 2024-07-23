@@ -8,7 +8,9 @@
 	<strong>轻量级binlog同步平台</strong>
 </p>
 <div>
-[![star](https://gitee.com/zj-prism/data-pulse/badge/star.svg?theme=dark)](https://gitee.com/zj-prism/data-pulse/stargazers)
+    <img src="https://gitee.com/zj-prism/data-pulse/badge/star.svg?theme=dark">
+
+[//]: # (    [![star]&#40;https://gitee.com/zj-prism/data-pulse/badge/star.svg?theme=dark&#41;]&#40;https://gitee.com/zj-prism/data-pulse/stargazers&#41;)
 </div>
 
 
