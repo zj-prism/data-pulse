@@ -1,4 +1,4 @@
-package top.primsnet.sync.business.fdtaskbaseconfig.entity;
+package top.primsnet.sync.business.pubdatasourceconfig.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -16,13 +16,13 @@ import lombok.Setter;
  * </p>
  *
  * @author joshua
- * @since 2024-07-18
+ * @since 2024-07-23 22:20:29
  */
 @Getter
 @Setter
-@TableName("fd_task_base_config")
-@ApiModel(value = "FdTaskBaseConfig对象", description = "")
-public class FdTaskBaseConfig implements Serializable {
+@TableName("pub_data_source_config")
+@ApiModel(value = "PubDataSourceConfig对象", description = "")
+public class PubDataSourceConfig implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -32,18 +32,15 @@ public class FdTaskBaseConfig implements Serializable {
     @TableField("name")
     private String name;
 
-    @TableField("data_from_type")
-    private Integer dataFromType;
+    @TableField("type")
+    private Integer type;
 
-    @TableField("data_from_db_id")
-    private Integer dataFromDbId;
+    @TableField("url")
+    private String url;
 
-    @TableField("data_to_type")
-    private Integer dataToType;
+    @TableField("user_name")
+    private String userName;
 
-    @TableField("data_to_db_id")
-    private Integer dataToDbId;
-
-    @TableField("status")
-    private Integer status;
+    @TableField("password")
+    private String password;
 }
