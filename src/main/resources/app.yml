@@ -1,9 +1,9 @@
 server.port: 9999
-
+server.contextPath: /api
 solon.app:
   name: 'top.primsnet'
   group: 'prims'
-
+solon.env: dev
 #配置后台管理mysql数据库
 db.db1:
   driverClassName: org.sqlite.JDBC

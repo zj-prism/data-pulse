@@ -8,7 +8,7 @@ import org.noear.solon.annotation.Init;
 import org.noear.solon.annotation.Inject;
 
 
-@Component
+//@Component
 @Slf4j
 public class MasterMysqlListener {
 
