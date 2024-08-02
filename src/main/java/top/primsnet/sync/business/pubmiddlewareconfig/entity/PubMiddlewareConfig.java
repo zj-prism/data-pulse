@@ -1,4 +1,4 @@
-package top.primsnet.sync.business.fdtaskbaseconfig.entity;
+package top.primsnet.sync.business.pubmiddlewareconfig.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -16,13 +16,13 @@ import lombok.Setter;
  * </p>
  *
  * @author joshua
- * @since 2024-07-18
+ * @since 2024-08-02 09:34:40
  */
 @Getter
 @Setter
-@TableName("fd_task_base_config")
-@ApiModel(value = "FdTaskBaseConfig对象", description = "")
-public class FdTaskBaseConfig implements Serializable {
+@TableName("pub_middleware_config")
+@ApiModel(value = "PubMiddlewareConfig对象", description = "")
+public class PubMiddlewareConfig implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -30,20 +30,20 @@ public class FdTaskBaseConfig implements Serializable {
     private Integer id;
 
     @TableField("name")
-    private String name;
+    private Integer name;
 
-    @TableField("data_from_type")
-    private Integer dataFromType;
+    @TableField("type")
+    private Integer type;
 
-    @TableField("data_from_db_id")
-    private Integer dataFromDbId;
+    @TableField("url")
+    private Integer url;
 
-    @TableField("data_to_type")
-    private Integer dataToType;
+    @TableField("user_name")
+    private Integer userName;
 
-    @TableField("data_to_db_id")
-    private Integer dataToDbId;
+    @TableField("password")
+    private Integer password;
 
-    @TableField("status")
-    private Integer status;
+    @TableField("extend")
+    private Integer extend;
 }
