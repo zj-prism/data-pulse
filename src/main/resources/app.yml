@@ -6,8 +6,12 @@ solon.app:
 solon.env: dev
 #配置后台管理mysql数据库
 db.db1:
-  driverClassName: org.sqlite.JDBC
-  jdbcUrl: jdbc:sqlite:./src/main/resources/db/datapulse.db
+  type: "com.zaxxer.hikari.HikariDataSource"
+  default: "db_rock0"
+  strict: true
+  db_rock0:
+    driverClassName: org.sqlite.JDBC
+    jdbcUrl: jdbc:sqlite:./src/main/resources/db/datapulse.db
 #redis配置
 redis.cache1:
   driverType: "redis" #驱动类型
