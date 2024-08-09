@@ -18,7 +18,7 @@ public class OtherController {
     public JSONObject login(){
         JSONObject jo = new JSONObject();
         JSONObject data = new JSONObject();
-        jo.put("code", 200);
+        jo.put("code", 0);
         jo.put("msg", "登录成功");
         data.put("token","System_Token");
         jo.put("data", data);
@@ -32,7 +32,7 @@ public class OtherController {
         JSONArray roles = new JSONArray();
         JSONArray buttons = new JSONArray();
         JSONArray routes = new JSONArray();
-        jo.put("code", 200);
+        jo.put("code", 0);
         jo.put("msg", "登录成功");
 
         data.put("userId",2);

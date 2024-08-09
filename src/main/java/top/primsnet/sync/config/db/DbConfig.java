@@ -1,6 +1,8 @@
 package top.primsnet.sync.config.db;
 
+import cn.hutool.json.JSONUtil;
 import com.zaxxer.hikari.HikariDataSource;
+import lombok.extern.slf4j.Slf4j;
 import org.noear.solon.annotation.Bean;
 import org.noear.solon.annotation.Configuration;
 import org.noear.solon.annotation.Inject;
@@ -12,6 +14,7 @@ import java.util.Map;
 import java.util.Properties;
 
 @Configuration
+@Slf4j
 public class DbConfig {
     @Bean(value = "db1", typed = true)
     public DynamicDataSource db1(@Inject("${db.db1}") DynamicDataSource ds) {
@@ -20,6 +23,7 @@ public class DbConfig {
 
 //    @Bean("db_user")
     public DataSource dsUser2(@Inject("${db.db1}") Properties props) {
+        log.info(JSONUtil.toJsonStr(props));
         //手动构建，可以不用配置：type, strict
         Map<String, DataSource> dsMap = DsUtils.buildDsMap(props, HikariDataSource.class);
         DataSource dsDef = dsMap.get("default");

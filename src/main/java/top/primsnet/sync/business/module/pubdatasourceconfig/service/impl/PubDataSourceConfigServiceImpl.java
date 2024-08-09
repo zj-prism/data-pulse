@@ -1,0 +1,152 @@
+package top.primsnet.sync.business.module.pubdatasourceconfig.service.impl;
+
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
+import org.noear.solon.annotation.Inject;
+import org.noear.solon.data.annotation.Tran;
+import top.primsnet.sync.business.datasource.service.DataSourceServiceContext;
+import top.primsnet.sync.business.datasource.to.CreateDataSourceStrTO;
+import top.primsnet.sync.business.module.pubdatasourceconfig.entity.PubDataSourceConfig;
+import top.primsnet.sync.business.module.pubdatasourceconfig.service.PubDataSourceConfigService;
+import top.primsnet.sync.business.module.pubdatasourceconfig.vo.PubDataSourceConfigReqVO;
+import top.primsnet.sync.business.module.pubdatasourceconfig.vo.PubDataSourceConfigResVO;
+import top.primsnet.sync.business.module.pubdatasourceconfig.convert.PubDataSourceConfigConvert;
+import top.primsnet.sync.business.module.pubdatasourceconfig.mapper.PubDataSourceConfigMapper;
+import cn.hutool.core.util.ObjUtil;
+import top.primsnet.sync.common.enums.DataSourceTypeEnum;
+import top.primsnet.sync.common.enums.SysCommonEnum;
+import top.primsnet.sync.common.exception.ServiceException;
+import top.primsnet.sync.common.mybatis.base.BaseServiceImpl;
+import top.primsnet.sync.common.mybatis.base.PageResult;
+import top.primsnet.sync.common.mybatis.page.PageProcess;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import io.swagger.annotations.ApiOperation;
+import org.noear.solon.annotation.Component;
+
+import java.util.List;
+
+/**
+ * <p>
+ * 服务实现类
+ * </p>
+ *
+ * @author joshua
+ * @since 2024-07-30 14:30:12
+ */
+@Component
+public class PubDataSourceConfigServiceImpl extends BaseServiceImpl<PubDataSourceConfigMapper, PubDataSourceConfig> implements PubDataSourceConfigService {
+
+    @Inject
+    DataSourceServiceContext dataSourceServiceContext;
+
+    @Override
+    @ApiOperation("分页")
+    public PageResult<PubDataSourceConfigResVO> page(PubDataSourceConfigReqVO reqVO) {
+       return PageProcess.pageResult(reqVO, () -> list(getQueryWrapper(reqVO)));
+    }
+
+    @Override
+    @ApiOperation("列表")
+    public List<PubDataSourceConfigResVO> list(PubDataSourceConfigReqVO reqVO) {
+       return PubDataSourceConfigConvert.INSTANCE.convert(list(getQueryWrapper(reqVO)));
+    }
+
+     @Override
+     @ApiOperation("详情")
+     public PubDataSourceConfigResVO detail(Integer id) {
+        return PubDataSourceConfigConvert.INSTANCE.convert(getById(id));
+     }
+
+
+     @Override
+     @ApiOperation("新增")
+     @Tran
+     public void add(PubDataSourceConfigReqVO reqVO) {
+        PubDataSourceConfig entity = PubDataSourceConfigConvert.INSTANCE.convert(reqVO);
+        //封装数据源加载json
+         CreateDataSourceStrTO dataSourceStrTO = new CreateDataSourceStrTO();
+         dataSourceStrTO.setType(DataSourceTypeEnum.MYSQL.getValue());
+         dataSourceStrTO.setBeanName(reqVO.getName());
+         dataSourceStrTO.setUrl(reqVO.getUrl());
+         dataSourceStrTO.setUserName(reqVO.getUserName());
+         dataSourceStrTO.setPassword(reqVO.getPassword());
+         String dataSourceStr = dataSourceServiceContext.getService(DataSourceTypeEnum.MYSQL.getRemark()).createDataSourceStr(dataSourceStrTO);
+         entity.setConfigJsonStr(dataSourceStr);
+         save(entity);
+     }
+
+     @Override
+     @ApiOperation("编辑")
+     public void edit(PubDataSourceConfigReqVO reqVO) {
+        PubDataSourceConfig entity = PubDataSourceConfigConvert.INSTANCE.convert(reqVO);
+         //封装数据源加载json
+         CreateDataSourceStrTO dataSourceStrTO = new CreateDataSourceStrTO();
+         dataSourceStrTO.setType(DataSourceTypeEnum.MYSQL.getValue());
+         dataSourceStrTO.setBeanName(reqVO.getName());
+         dataSourceStrTO.setUrl(reqVO.getUrl());
+         dataSourceStrTO.setUserName(reqVO.getUserName());
+         dataSourceStrTO.setPassword(reqVO.getPassword());
+         String dataSourceStr = dataSourceServiceContext.getService(DataSourceTypeEnum.MYSQL.getRemark()).createDataSourceStr(dataSourceStrTO);
+         entity.setConfigJsonStr(dataSourceStr);
+        updateById(entity);
+     }
+
+     @Override
+     @ApiOperation("删除")
+     public void delete(Integer id) {
+       removeById(id);
+     }
+
+    /**
+     * 加载数据源
+     * @param id 数据源ID
+     */
+    @Override
+    public void loadDataSource(Integer id) {
+        PubDataSourceConfig entity = getById(id);
+        if (ObjUtil.isEmpty(entity) || StrUtil.isEmpty(entity.getConfigJsonStr())){
+            throw new ServiceException("加载数据源失败,数据源配置不存在,请重新配置数据源");
+        }
+        Integer type = entity.getType();
+        DataSourceTypeEnum dataSourceTypeEnum = DataSourceTypeEnum.getByValue(type);
+        if (ObjUtil.isEmpty(dataSourceTypeEnum)){
+            throw new ServiceException("当前数据源未兼容");
+        }
+        //加载数据源
+        dataSourceServiceContext.getService(dataSourceTypeEnum.getRemark()).initDataSource(entity.getName(),entity.getConfigJsonStr());
+        //更改数据源加载状态
+        entity.setLoadStatus((Integer) SysCommonEnum.DATA_SOURCE_LOAD_OPEN_TYPE.getValue());
+        updateById(entity);
+    }
+
+    /**
+     * @param id
+     */
+    @Override
+    public void unloadDataSource(Integer id) {
+        PubDataSourceConfig entity = getById(id);
+        if (ObjUtil.isEmpty(entity) || StrUtil.isEmpty(entity.getConfigJsonStr())){
+            throw new ServiceException("加载数据源失败,数据源配置不存在,请重新配置数据源");
+        }
+        Integer type = entity.getType();
+        DataSourceTypeEnum dataSourceTypeEnum = DataSourceTypeEnum.getByValue(type);
+        if (ObjUtil.isEmpty(dataSourceTypeEnum)){
+            throw new ServiceException("当前数据源未兼容");
+        }
+        dataSourceServiceContext.getService(dataSourceTypeEnum.getRemark()).logoutDataSource(entity.getName());
+        entity.setLoadStatus((Integer) SysCommonEnum.DATA_SOURCE_LOAD_CLOSE_TYPE.getValue());
+        updateById(entity);
+    }
+
+    private QueryWrapper<PubDataSourceConfig> getQueryWrapper(PubDataSourceConfigReqVO reqVO) {
+        QueryWrapper<PubDataSourceConfig> queryWrapper = new QueryWrapper<>();
+        if (ObjUtil.isNotEmpty(reqVO)){
+            if (StrUtil.isNotBlank(reqVO.getName())){
+                queryWrapper.lambda().like(PubDataSourceConfig::getName,reqVO.getName());
+            }
+        }
+        return queryWrapper;
+    }
+}
+
