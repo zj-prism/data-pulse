@@ -38,10 +38,9 @@ test.esx:
 
 #配置mybatis-plus
 mybatis.db1:
-  typeAliases:    #支持包名 或 类名 //支持 ** 和 *
+  typeAliases:
     - "top.primsnet.sync.business.**.vo"
-  mappers:        #支持包名 或 类名 或 xml（.xml结尾）//支持 ** 和 *
-#    - "classpath:mapper/*.xml"
+  mappers:
     - "top.primsnet.sync.business.**.mapper"
   configuration:
     cacheEnabled: false
@@ -67,8 +66,6 @@ pagehelper:
 --- ### 接口文档配置
 springdoc:
   def-package: top.primsnet.sync.business
-  # 设置对象型参数的展示形式（设为 true 表示将对象型参数平展开，即对象内的属性直接作为参数展示而不是嵌套在对象内，默认 false）
-  # 如果不添加该全局配置，可以在需要如此处理的对象参数类上使用 @ParameterObject
   default-flat-param-object: true
 #引入其他配置文件
 solon:
