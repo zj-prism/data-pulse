@@ -5,15 +5,14 @@ import org.noear.solon.Solon;
 import org.noear.solon.annotation.Component;
 import org.noear.solon.annotation.Init;
 import top.primsnet.sync.common.exception.ServiceException;
-import top.primsnet.sync.datapush.to.service.DataConsumerService;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @Author: joshua
- * @Description: TODO
- * @DateTime: 2024/8/8 19:41
+ * Author: joshua
+ * Description: TODO
+ * DateTime: 2024/8/8 19:41
  **/
 @Component
 public class DataSourceServiceContext {

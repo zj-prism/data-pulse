@@ -9,7 +9,7 @@ import ${package.Entity}.${entity};
  * ${table.comment!} Mapper 接口
  * </p>
  *
- * @author ${author}
+ * Author ${author}
  * @since ${date}
  */
 @Mapper

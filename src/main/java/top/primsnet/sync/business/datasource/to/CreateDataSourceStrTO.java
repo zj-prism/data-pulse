@@ -3,9 +3,9 @@ package top.primsnet.sync.business.datasource.to;
 import lombok.Data;
 
 /**
- * @Author: joshua
- * @Description: TODO
- * @DateTime: 2024/8/8 19:07
+ * Author: joshua
+ * Description: TODO
+ * DateTime: 2024/8/8 19:07
  **/
 @Data
 public class CreateDataSourceStrTO {

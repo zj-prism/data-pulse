@@ -8,7 +8,7 @@ import top.primsnet.sync.common.mybatis.base.BaseQuery;
  * ${table.comment!}
  * </p>
  *
- * @author ${author}
+ * Author ${author}
  * @since ${date}
  */
 

@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiModel;
     * ${table.comment!}
     * </p>
 *
-* @author ${author}
+* Author ${author}
 * @since ${date}
 */
 

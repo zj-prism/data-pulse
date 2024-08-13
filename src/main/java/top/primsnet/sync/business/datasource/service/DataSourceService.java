@@ -4,9 +4,9 @@ package top.primsnet.sync.business.datasource.service;
 import top.primsnet.sync.business.datasource.to.CreateDataSourceStrTO;
 
 /**
- * @Author: joshua
- * @Description: TODO
- * @DateTime: 2024/8/8 18:59
+ * Author: joshua
+ * Description: TODO
+ * DateTime: 2024/8/8 18:59
  **/
 public interface DataSourceService {
 

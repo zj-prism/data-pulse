@@ -9,7 +9,7 @@ import top.primsnet.sync.common.mybatis.base.BaseQuery;
  * 
  * </p>
  *
- * @author joshua
+ * Author joshua
  * @since 2024-07-30 14:30:12
  */
 

@@ -7,9 +7,9 @@ import org.noear.solon.annotation.Mapping;
 import org.noear.solon.core.handle.MethodType;
 
 /**
- * @Author: joshua
- * @Description: TODO
- * @DateTime: 2024/7/29 下午4:56
+ * Author: joshua
+ * Description: TODO
+ * DateTime: 2024/7/29 下午4:56
  **/
 @Controller
 public class OtherController {

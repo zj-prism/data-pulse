@@ -9,7 +9,7 @@ import top.primsnet.sync.business.module.pubmiddlewareconfig.entity.PubMiddlewar
  *  Mapper 接口
  * </p>
  *
- * @author joshua
+ * Author joshua
  * @since 2024-08-02 09:34:40
  */
 @Mapper

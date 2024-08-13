@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * 订单
  *
- * @author jack jack@126.com
+ * Author jack jack@126.com
  * @since 1.0.0 2024-02-25
  */
 @EqualsAndHashCode(callSuper=false)

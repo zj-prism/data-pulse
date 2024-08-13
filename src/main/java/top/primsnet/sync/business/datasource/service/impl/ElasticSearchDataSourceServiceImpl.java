@@ -5,28 +5,21 @@ import cn.hutool.core.util.ObjUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.zaxxer.hikari.HikariDataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.noear.esearchx.EsContext;
 import org.noear.solon.Solon;
 import org.noear.solon.Utils;
 import org.noear.solon.annotation.Component;
-import org.noear.solon.annotation.Inject;
 import org.noear.solon.core.BeanWrap;
 import org.noear.solon.core.Props;
-import org.noear.solon.data.dynamicds.DynamicDataSource;
 import top.primsnet.sync.business.datasource.service.DataSourceService;
 import top.primsnet.sync.business.datasource.to.CreateDataSourceStrTO;
-import top.primsnet.sync.common.enums.SysCommonEnum;
 import top.primsnet.sync.common.exception.ServiceException;
 
-import javax.sql.DataSource;
-import java.io.IOException;
-
 /**
- * @Author: joshua
- * @Description: es数据源实现
- * @DateTime: 2024/8/8 18:59
+ * Author:  joshua
+ * Description: es数据源实现
+ * DateTime: 2024/8/8 18:59
  **/
 @Component("ElasticSearchDataSourceServiceImpl")
 @Slf4j

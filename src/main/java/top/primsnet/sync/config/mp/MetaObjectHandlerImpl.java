@@ -8,7 +8,7 @@ import org.noear.solon.annotation.Component;
 import java.util.Date;
 
 /**
- * @author noear 2022/4/17 created
+ * Author noear 2022/4/17 created
  */
 @Component
 @Slf4j

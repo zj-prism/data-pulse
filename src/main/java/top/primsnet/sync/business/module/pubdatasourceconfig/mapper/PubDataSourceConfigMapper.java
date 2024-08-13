@@ -9,7 +9,7 @@ import top.primsnet.sync.business.module.pubdatasourceconfig.entity.PubDataSourc
  *  Mapper 接口
  * </p>
  *
- * @author joshua
+ * Author joshua
  * @since 2024-07-30 14:30:12
  */
 @Mapper

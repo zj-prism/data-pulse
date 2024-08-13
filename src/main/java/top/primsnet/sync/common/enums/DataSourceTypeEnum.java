@@ -3,9 +3,9 @@ package top.primsnet.sync.common.enums;
 import lombok.Getter;
 
 /**
- * @Author: joshua
- * @Description: TODO
- * @DateTime: 2024/8/8 19:26
+ * Author: joshua
+ * Description: TODO
+ * DateTime: 2024/8/8 19:26
  **/
 @Getter
 public enum DataSourceTypeEnum {

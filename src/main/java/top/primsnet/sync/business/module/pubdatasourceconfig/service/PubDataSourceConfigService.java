@@ -11,7 +11,7 @@ import top.primsnet.sync.common.mybatis.base.BaseService;
  * 服务类
  * </p>
  *
- * @author joshua
+ * Author joshua
  * @since 2024-07-30 14:30:12
  */
 public interface PubDataSourceConfigService extends BaseService<PubDataSourceConfig> {

@@ -11,7 +11,7 @@ import top.primsnet.sync.common.mybatis.base.BaseService;
  * 服务类
  * </p>
  *
- * @author ${author}
+ * Author ${author}
  * @since ${date}
  */
 <#if kotlin>

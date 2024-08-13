@@ -10,7 +10,7 @@ import java.util.List;
 /**
 *
 *
-* @author ${author}
+* Author ${author}
 * @since ${date}
 */
 @Mapper

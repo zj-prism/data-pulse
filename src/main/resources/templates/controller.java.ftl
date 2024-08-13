@@ -19,7 +19,7 @@ import io.swagger.annotations.ApiOperation;
  *  前端控制器
  * </p>
  *
- * @author ${author}
+ * Author ${author}
  * @since ${date}
  */
 

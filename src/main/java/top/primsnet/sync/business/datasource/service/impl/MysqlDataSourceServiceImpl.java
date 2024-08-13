@@ -21,9 +21,9 @@ import javax.sql.DataSource;
 import java.io.IOException;
 
 /**
- * @Author: joshua
- * @Description: mysql数据源实现
- * @DateTime: 2024/8/8 18:59
+ * Author: joshua
+ * Description: mysql数据源实现
+ * DateTime: 2024/8/8 18:59
  **/
 @Component("MysqlDataSourceServiceImpl")
 @Slf4j

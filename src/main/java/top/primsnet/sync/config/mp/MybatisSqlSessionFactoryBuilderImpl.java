@@ -5,7 +5,7 @@ import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 /**
- * @author noear 2021/10/20 created
+ * Author noear 2021/10/20 created
  */
 public class MybatisSqlSessionFactoryBuilderImpl extends MybatisSqlSessionFactoryBuilder {
     @Override
