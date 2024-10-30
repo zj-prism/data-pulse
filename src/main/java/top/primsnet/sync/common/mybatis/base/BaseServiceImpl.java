@@ -1,13 +1,13 @@
 package top.primsnet.sync.common.mybatis.base;
 
 import cn.hutool.core.util.StrUtil;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.solon.plugins.pagination.Page;
 import com.baomidou.mybatisplus.solon.service.impl.ServiceImpl;
+import top.primsnet.sync.common.mybatis.MyBaseMapper;
 
-public class BaseServiceImpl<M extends BaseMapper<T>, T> extends ServiceImpl<M, T> implements BaseService<T> {
+public class BaseServiceImpl<M extends MyBaseMapper<T>, T> extends ServiceImpl<M, T> implements BaseService<T> {
 
     /**
      * 获取分页对象

@@ -109,6 +109,7 @@ public class MysqlDataSourceServiceImpl implements DataSourceService {
         //卸载数据源
         try {
             dds.removeTargetDataSource(beanName);
+            log.info("卸载mysql数据源成功,名称：{}",beanName);
         } catch (IOException e) {
             throw new ServiceException("卸载数据源失败,bean名称：%s,异常:%s".formatted(beanName,ExceptionUtil.stacktraceToString(e)));
         }
