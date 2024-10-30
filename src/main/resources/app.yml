@@ -34,9 +34,9 @@ solon.cloud.rabbitmq:
     virtualHost: "test"
 #配置es
 test.esx:
-  url: 127.0.0.1:9200
-  username: elastic
-  password: elastic
+#  url: 127.0.0.1:9200
+#  username: elastic
+#  password: elastic
 
 #配置mybatis-plus
 mybatis.db1:
