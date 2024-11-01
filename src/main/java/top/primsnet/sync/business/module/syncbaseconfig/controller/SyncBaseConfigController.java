@@ -1,16 +1,18 @@
 package top.primsnet.sync.business.module.syncbaseconfig.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.noear.solon.annotation.Controller;
+import org.noear.solon.annotation.Inject;
+import org.noear.solon.annotation.Mapping;
+import org.noear.solon.core.handle.MethodType;
 import top.primsnet.sync.business.module.syncbaseconfig.service.SyncBaseConfigService;
 import top.primsnet.sync.business.module.syncbaseconfig.vo.SyncBaseConfigReqVO;
 import top.primsnet.sync.business.module.syncbaseconfig.vo.SyncBaseConfigResVO;
 import top.primsnet.sync.common.mybatis.base.PageResult;
 import top.primsnet.sync.common.result.Result;
-import java.util.ArrayList;
+
 import java.util.List;
-import org.noear.solon.core.handle.MethodType;
-import org.noear.solon.annotation.*;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 
 
 
@@ -23,7 +25,7 @@ import io.swagger.annotations.ApiOperation;
  * @since 2024-11-01 17:40:38
  */
 
-@Api(tags = "syncbaseconfig")
+@Api(tags = "同步任务基础配置")
 @Controller
 @Mapping("/syncbaseconfig")
 public class SyncBaseConfigController {

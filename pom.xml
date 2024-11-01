@@ -21,8 +21,8 @@
 
     <properties>
         <java.version>17</java.version>
-        <mysql.version>5.1.49</mysql.version>
-        <sqlite.version>3.34.0</sqlite.version>
+        <mysql.version>8.0.28</mysql.version>
+        <sqlite.version>3.41.2.2</sqlite.version>
         <hikari.version>4.0.3</hikari.version>
         <mapstruct.version>3.8.1</mapstruct.version>
         <hutol.version>5.8.29</hutol.version>
@@ -94,10 +94,6 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.noear</groupId>
-            <artifactId>mybatis-pagehelper-solon-plugin</artifactId>
-        </dependency>
-        <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
             <version>${hutol.version}</version>
@@ -128,6 +124,22 @@
             <groupId>com.gitee.Jmysy</groupId>
             <artifactId>binlog4j-core</artifactId>
             <version>${binlog4j.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>json</artifactId>
+                    <groupId>org.json</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20240303</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.noear</groupId>
+            <artifactId>sa-token-solon-plugin</artifactId>
         </dependency>
 
         <dependency>

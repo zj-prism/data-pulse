@@ -47,7 +47,7 @@ public class MysqlDataSourceServiceImpl implements DataSourceService {
         }
         //构建动态加载数据源json串
         JSONObject configJson = new JSONObject();
-        configJson.set("driverClassName", SysCommonEnum.MYSQL_5_DRIVER_CLASS_NAME.getValue());
+        configJson.set("driverClassName", SysCommonEnum.MYSQL_8_DRIVER_CLASS_NAME.getValue());
         configJson.set("type",SysCommonEnum.DATA_SOURCE_POOL_TYPE.getValue());
         configJson.set("strict",SysCommonEnum.DATA_SOURCE_STRICT_CLOSE_TYPE.getValue());
         configJson.set("jdbcUrl",dataSourceStrTO.getUrl());
@@ -104,13 +104,15 @@ public class MysqlDataSourceServiceImpl implements DataSourceService {
         //获取数据源
         DataSource dataSource = dds.getTargetDataSource(beanName);
         if (ObjUtil.isEmpty(dataSource)){
-            throw new ServiceException("卸载mysql数据源失败,名称：%s,数据源不存在".formatted(beanName));
+            log.warn("卸载mysql数据源失败,名称：%s,数据源不存在,请确认服务是否正常".formatted(beanName));
+//            throw new ServiceException("卸载mysql数据源失败,名称：%s,数据源不存在".formatted(beanName));
         }
         //卸载数据源
         try {
             dds.removeTargetDataSource(beanName);
             log.info("卸载mysql数据源成功,名称：{}",beanName);
         } catch (IOException e) {
+            e.printStackTrace();
             throw new ServiceException("卸载数据源失败,bean名称：%s,异常:%s".formatted(beanName,ExceptionUtil.stacktraceToString(e)));
         }
     }

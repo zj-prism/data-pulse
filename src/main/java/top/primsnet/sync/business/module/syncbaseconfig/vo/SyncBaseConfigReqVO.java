@@ -1,6 +1,7 @@
 package top.primsnet.sync.business.module.syncbaseconfig.vo;
-import lombok.Data;
+
 import io.swagger.annotations.ApiModel;
+import lombok.Data;
 import top.primsnet.sync.common.mybatis.base.BaseQuery;
 
 /**
@@ -19,6 +20,8 @@ public class SyncBaseConfigReqVO extends BaseQuery {
     private Integer id;
 
     private String name;
+
+    private String type;
 
     private Integer fromId;
 

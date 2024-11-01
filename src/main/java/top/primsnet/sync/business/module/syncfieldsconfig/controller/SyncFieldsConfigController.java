@@ -1,16 +1,18 @@
 package top.primsnet.sync.business.module.syncfieldsconfig.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.noear.solon.annotation.Controller;
+import org.noear.solon.annotation.Inject;
+import org.noear.solon.annotation.Mapping;
+import org.noear.solon.core.handle.MethodType;
 import top.primsnet.sync.business.module.syncfieldsconfig.service.SyncFieldsConfigService;
 import top.primsnet.sync.business.module.syncfieldsconfig.vo.SyncFieldsConfigReqVO;
 import top.primsnet.sync.business.module.syncfieldsconfig.vo.SyncFieldsConfigResVO;
 import top.primsnet.sync.common.mybatis.base.PageResult;
 import top.primsnet.sync.common.result.Result;
-import java.util.ArrayList;
+
 import java.util.List;
-import org.noear.solon.core.handle.MethodType;
-import org.noear.solon.annotation.*;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 
 
 
@@ -23,7 +25,7 @@ import io.swagger.annotations.ApiOperation;
  * @since 2024-11-01 17:41:40
  */
 
-@Api(tags = "syncfieldsconfig")
+@Api(tags = "同步任务字段配置")
 @Controller
 @Mapping("/syncfieldsconfig")
 public class SyncFieldsConfigController {
