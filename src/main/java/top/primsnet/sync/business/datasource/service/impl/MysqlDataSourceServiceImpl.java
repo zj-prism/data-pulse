@@ -76,7 +76,7 @@ public class MysqlDataSourceServiceImpl implements DataSourceService {
             log.info("开始加载mysql数据源,名称:{},配置:{}",beanName,configJsonStr);
             Props props = new Props();
             props.loadAdd(Utils.buildProperties(configJsonStr));
-            DataSource ds = props.getBean(HikariDataSource.class);
+            DataSource ds = props.toBean(HikariDataSource.class);
             dds.addTargetDataSource(beanName, ds);
             //获取数据源
             DataSource dataSource = dds.getTargetDataSource(beanName);
