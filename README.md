@@ -50,5 +50,19 @@
     <img src="https://gitee.com/zj-prism/data-pulse/raw/v1.0-master/src/main/resources/imgs/data-pulse.png">
 </div>
 
+### 💡注意
+   请将静态文件下的db文件放到设备的固定位置后在配置文件中配置文件地址后重启服务，防止更新代码后覆盖db文件导致数据丢失。
+
+```yaml
+#示例:
+db.db1:
+  db_rock0:
+    driverClassName: org.sqlite.JDBC
+    jdbcUrl: jdbc:sqlite:/Users/joshua/IdeaProjects/projects/datapulse.db
+```
+
+
+
+
 ### 👥联系我们
 QQ群：`621215734`
