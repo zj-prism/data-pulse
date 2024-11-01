@@ -31,17 +31,16 @@ public class GenCodeMain {
         String projectName="primsnet";
         for(String table:tables ){
             // 使用 FastAutoGenerator 快速配置代码生成器
-            FastAutoGenerator.create("jdbc:sqlite:./src/main/resources/db/datapulse.db", "", "")
-
+            FastAutoGenerator.create("jdbc:sqlite:/Users/joshua/IdeaProjects/projects/datapulse.db", "", "")
                     .globalConfig(builder -> {
                         builder.author(author) // 设置作者
-                                .outputDir("src\\main\\java")
+                                .outputDir("src/main/java")
                                 .enableSwagger()
                                 .commentDate(DatePattern.NORM_DATETIME_PATTERN)
                         ; // 输出目录
                     })
                     .packageConfig(builder -> {
-                        builder.parent("top."+projectName+".sync.business").moduleName(table.replace("_","")) // 设置父包名
+                        builder.parent("top."+projectName+".sync.business.module").moduleName(table.replace("_","")) // 设置父包名
                                 .entity("entity")// 设置实体类包名
                                 .mapper("mapper") // 设置 Mapper 接口包名
                                 .service("service") // 设置 Service 接口包名
@@ -62,11 +61,11 @@ public class GenCodeMain {
                     })
                     .injectionConfig(consumer -> {
                         List<CustomFile> customFile = new ArrayList<>();
-                        CustomFile reqVO=new CustomFile.Builder().filePath("src/main/java/").packageName("top/primsnet/sync/business/"+table.replace("_","")+"/vo/").fileName("ReqVO.java").templatePath("/templates/req.java.ftl").build();
+                        CustomFile reqVO=new CustomFile.Builder().filePath("src/main/java/").packageName("top/primsnet/sync/business/module/"+table.replace("_","")+"/vo/").fileName("ReqVO.java").templatePath("/templates/req.java.ftl").build();
                         customFile.add(reqVO);
-                        CustomFile resVO=new CustomFile.Builder().filePath("src/main/java/").packageName("top/primsnet/sync/business/"+table.replace("_","")+"/vo/").fileName("ResVO.java").templatePath("/templates/res.java.ftl").build();
+                        CustomFile resVO=new CustomFile.Builder().filePath("src/main/java/").packageName("top/primsnet/sync/business/module/"+table.replace("_","")+"/vo/").fileName("ResVO.java").templatePath("/templates/res.java.ftl").build();
                         customFile.add(resVO);
-                        CustomFile mapstruct=new CustomFile.Builder().filePath("src/main/java/").packageName("top/primsnet/sync/business/"+table.replace("_","")+"/convert/").fileName("Convert.java").templatePath("/templates/convert.ftl").build();
+                        CustomFile mapstruct=new CustomFile.Builder().filePath("src/main/java/").packageName("top/primsnet/sync/business/module/"+table.replace("_","")+"/convert/").fileName("Convert.java").templatePath("/templates/convert.ftl").build();
                         customFile.add(mapstruct);
                         consumer.customFile(customFile);
                     })

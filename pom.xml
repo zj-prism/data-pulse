@@ -57,6 +57,11 @@
             <version>${mp.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.31</version>
+        </dependency>
+        <dependency>
             <groupId>org.noear</groupId>
             <artifactId>mybatis-pagehelper-solon-plugin</artifactId>
         </dependency>
