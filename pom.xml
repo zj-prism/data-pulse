@@ -21,7 +21,7 @@
 
     <properties>
         <java.version>17</java.version>
-        <mysql.version>8.0.28</mysql.version>
+        <mysql.version>9.1.0</mysql.version>
         <sqlite.version>3.41.2.2</sqlite.version>
         <hikari.version>4.0.3</hikari.version>
         <mapstruct.version>3.8.1</mapstruct.version>
@@ -31,6 +31,9 @@
         <binlog4j.version>1.9.1</binlog4j.version>
         <esearchx.version>1.0.25</esearchx.version>
         <mp.version>3.5.7</mp.version>
+        <pb-java.version>4.28.3</pb-java.version>
+        <json.version>20240303</json.version>
+        <freemarker.version>2.3.31</freemarker.version>
     </properties>
 
     <dependencies>
@@ -59,7 +62,7 @@
         <dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
-            <version>2.3.31</version>
+            <version>${freemarker.version}</version>
         </dependency>
         <dependency>
             <groupId>org.noear</groupId>
@@ -75,9 +78,20 @@
             <version>${hikari.version}</version>
         </dependency>
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
             <version>${mysql.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.protobuf</groupId>
+                    <artifactId>protobuf-java</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>${pb-java.version}</version>
         </dependency>
         <dependency>
             <groupId>org.xerial</groupId>
@@ -134,7 +148,7 @@
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20240303</version>
+            <version>${json.version}</version>
         </dependency>
 
         <dependency>
