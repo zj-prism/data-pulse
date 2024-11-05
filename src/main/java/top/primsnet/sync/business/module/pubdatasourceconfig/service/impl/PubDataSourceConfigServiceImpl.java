@@ -1,28 +1,27 @@
 package top.primsnet.sync.business.module.pubdatasourceconfig.service.impl;
 
+import cn.hutool.core.util.ObjUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.json.JSONObject;
-import cn.hutool.json.JSONUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import io.swagger.annotations.ApiOperation;
+import org.noear.solon.annotation.Component;
 import org.noear.solon.annotation.Inject;
 import org.noear.solon.data.annotation.Tran;
 import top.primsnet.sync.business.datasource.service.DataSourceServiceContext;
 import top.primsnet.sync.business.datasource.to.CreateDataSourceStrTO;
+import top.primsnet.sync.business.datasource.to.GetDataSourceFieldsTO;
+import top.primsnet.sync.business.module.pubdatasourceconfig.convert.PubDataSourceConfigConvert;
 import top.primsnet.sync.business.module.pubdatasourceconfig.entity.PubDataSourceConfig;
+import top.primsnet.sync.business.module.pubdatasourceconfig.mapper.PubDataSourceConfigMapper;
 import top.primsnet.sync.business.module.pubdatasourceconfig.service.PubDataSourceConfigService;
 import top.primsnet.sync.business.module.pubdatasourceconfig.vo.PubDataSourceConfigReqVO;
 import top.primsnet.sync.business.module.pubdatasourceconfig.vo.PubDataSourceConfigResVO;
-import top.primsnet.sync.business.module.pubdatasourceconfig.convert.PubDataSourceConfigConvert;
-import top.primsnet.sync.business.module.pubdatasourceconfig.mapper.PubDataSourceConfigMapper;
-import cn.hutool.core.util.ObjUtil;
 import top.primsnet.sync.common.enums.DataSourceTypeEnum;
 import top.primsnet.sync.common.enums.SysCommonEnum;
 import top.primsnet.sync.common.exception.ServiceException;
 import top.primsnet.sync.common.mybatis.base.BaseServiceImpl;
 import top.primsnet.sync.common.mybatis.base.PageResult;
 import top.primsnet.sync.common.mybatis.page.PageProcess;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import io.swagger.annotations.ApiOperation;
-import org.noear.solon.annotation.Component;
 
 import java.util.List;
 
@@ -139,11 +138,34 @@ public class PubDataSourceConfigServiceImpl extends BaseServiceImpl<PubDataSourc
         updateById(entity);
     }
 
+    /**
+     * @param tableName
+     * @return
+     */
+    @Override
+    public List<GetDataSourceFieldsTO> getFields(Integer id,String tableName) {
+        PubDataSourceConfig entity = getById(id);
+        if (ObjUtil.isEmpty(entity) || StrUtil.isEmpty(entity.getConfigJsonStr())){
+            throw new ServiceException("加载数据源失败,数据源配置不存在,请重新配置数据源");
+        }
+        Integer type = entity.getType();
+        DataSourceTypeEnum dataSourceTypeEnum = DataSourceTypeEnum.getByValue(type);
+        if (ObjUtil.isEmpty(dataSourceTypeEnum)){
+            throw new ServiceException("当前数据源未兼容");
+        }
+        this.baseMapper.getFields(tableName);
+//        return dataSourceServiceContext.getService(dataSourceTypeEnum.getRemark()).getFields(entity.getName(),tableName);
+        return List.of();
+    }
+
     private QueryWrapper<PubDataSourceConfig> getQueryWrapper(PubDataSourceConfigReqVO reqVO) {
         QueryWrapper<PubDataSourceConfig> queryWrapper = new QueryWrapper<>();
         if (ObjUtil.isNotEmpty(reqVO)){
             if (StrUtil.isNotBlank(reqVO.getName())){
                 queryWrapper.lambda().like(PubDataSourceConfig::getName,reqVO.getName());
+            }
+            if (StrUtil.isNotBlank(reqVO.getLoadStatus())){
+                queryWrapper.lambda().eq(PubDataSourceConfig::getLoadStatus,reqVO.getLoadStatus());
             }
         }
         return queryWrapper;

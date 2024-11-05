@@ -16,16 +16,22 @@ import lombok.Data;
 @ApiModel(value = "SyncBaseConfigResVO")
 public class SyncBaseConfigResVO {
 
+    //ID
     private Integer id;
 
+    //名称
     private String name;
 
+    //类型
     private String type;
 
+    //来源
     private Integer fromId;
 
+    //目标
     private Integer toId;
 
+    //状态
     private Integer status;
 
 }

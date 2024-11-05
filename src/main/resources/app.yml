@@ -49,6 +49,7 @@ mybatis.db1:
     mapperVerifyEnabled: false
     mapUnderscoreToCamelCase: true
 #    logImpl: org.apache.ibatis.logging.nologging.NoLoggingImpl
+    #logImpl: org.apache.ibatis.logging.stdout.StdOutImpl
   globalConfig:
     banner: false
     metaObjectHandler: "top.primsnet.sync.config.mp.MetaObjectHandlerImpl"

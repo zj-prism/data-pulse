@@ -1,8 +1,12 @@
 package top.primsnet.sync.business.module.pubdatasourceconfig.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import top.primsnet.sync.common.mybatis.MyBaseMapper;
+import org.apache.ibatis.annotations.Param;
+import top.primsnet.sync.business.datasource.to.GetDataSourceFieldsTO;
 import top.primsnet.sync.business.module.pubdatasourceconfig.entity.PubDataSourceConfig;
+import top.primsnet.sync.common.mybatis.MyBaseMapper;
+
+import java.util.List;
 
 /**
  * <p>
@@ -15,4 +19,6 @@ import top.primsnet.sync.business.module.pubdatasourceconfig.entity.PubDataSourc
 @Mapper
 public interface PubDataSourceConfigMapper extends MyBaseMapper<PubDataSourceConfig> {
 
+
+    List<GetDataSourceFieldsTO> getFields(@Param("tableName") String tableName);
 }

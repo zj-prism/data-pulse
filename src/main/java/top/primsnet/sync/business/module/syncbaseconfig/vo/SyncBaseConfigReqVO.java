@@ -17,16 +17,22 @@ import top.primsnet.sync.common.mybatis.base.BaseQuery;
 @ApiModel(value = "SyncBaseConfigReqVO")
 public class SyncBaseConfigReqVO extends BaseQuery {
 
+    //ID
     private Integer id;
 
+    //名称
     private String name;
 
+    //类型
     private String type;
 
+    //来源
     private Integer fromId;
 
+    //目标
     private Integer toId;
 
+    //状态
     private Integer status;
 
 }

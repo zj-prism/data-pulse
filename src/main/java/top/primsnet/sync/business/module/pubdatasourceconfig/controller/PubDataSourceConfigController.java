@@ -1,5 +1,13 @@
 package top.primsnet.sync.business.module.pubdatasourceconfig.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.noear.solon.annotation.Controller;
+import org.noear.solon.annotation.Inject;
+import org.noear.solon.annotation.Mapping;
+import org.noear.solon.annotation.Path;
+import org.noear.solon.core.handle.MethodType;
+import top.primsnet.sync.business.datasource.to.GetDataSourceFieldsTO;
 import top.primsnet.sync.business.module.pubdatasourceconfig.service.PubDataSourceConfigService;
 import top.primsnet.sync.business.module.pubdatasourceconfig.vo.PubDataSourceConfigReqVO;
 import top.primsnet.sync.business.module.pubdatasourceconfig.vo.PubDataSourceConfigResVO;
@@ -7,10 +15,6 @@ import top.primsnet.sync.common.mybatis.base.PageResult;
 import top.primsnet.sync.common.result.Result;
 
 import java.util.List;
-import org.noear.solon.core.handle.MethodType;
-import org.noear.solon.annotation.*;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 
 
 
@@ -82,5 +86,12 @@ public class PubDataSourceConfigController {
     public Result<String> unloadDataSource(@Path("id") Integer id){
         pubDataSourceConfigService.unloadDataSource(id);
         return Result.ok();
+    }
+
+    @Mapping(value = "getFields/{id}",method = MethodType.GET)
+    @ApiOperation("获取表字段")
+    public Result<List<GetDataSourceFieldsTO>> getFields(@Path("id") Integer id,String tableName){
+        List<GetDataSourceFieldsTO> list = pubDataSourceConfigService.getFields(id,tableName);
+        return Result.ok(list);
     }
 }

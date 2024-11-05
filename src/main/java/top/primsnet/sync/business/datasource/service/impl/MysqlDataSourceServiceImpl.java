@@ -12,13 +12,18 @@ import org.noear.solon.annotation.Component;
 import org.noear.solon.annotation.Inject;
 import org.noear.solon.core.Props;
 import org.noear.solon.data.dynamicds.DynamicDataSource;
+import org.noear.solon.data.dynamicds.DynamicDsKey;
+import org.noear.wood.annotation.Db;
+import top.primsnet.sync.business.datasource.mapper.MysqlDataSourceMapper;
 import top.primsnet.sync.business.datasource.service.DataSourceService;
 import top.primsnet.sync.business.datasource.to.CreateDataSourceStrTO;
+import top.primsnet.sync.business.datasource.to.GetDataSourceFieldsTO;
 import top.primsnet.sync.common.enums.SysCommonEnum;
 import top.primsnet.sync.common.exception.ServiceException;
 
 import javax.sql.DataSource;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Author: joshua
@@ -31,6 +36,9 @@ public class MysqlDataSourceServiceImpl implements DataSourceService {
 
     @Inject
     DynamicDataSource dds;
+
+    @Db("db1")
+    MysqlDataSourceMapper mysqlDataSourceMapper;
 
     /**
      * 创建数据源的动态加载json
@@ -114,6 +122,31 @@ public class MysqlDataSourceServiceImpl implements DataSourceService {
         } catch (IOException e) {
             e.printStackTrace();
             throw new ServiceException("卸载数据源失败,bean名称：%s,异常:%s".formatted(beanName,ExceptionUtil.stacktraceToString(e)));
+        }
+    }
+
+    /**
+     * 获取数据源字段
+     * @param beanName 数据源
+     * @param tableName 表明
+     * @return 字段集合
+     */
+    @Override
+    public List<GetDataSourceFieldsTO> getFields(String beanName,String tableName) {
+        if (StrUtil.isEmpty(beanName)){
+            throw new ServiceException("获取数据源字段mysql数据源失败,参数校验失败-参数不完整");
+        }
+        //获取数据源
+        DataSource dataSource = dds.getTargetDataSource(beanName);
+        if (ObjUtil.isEmpty(dataSource)){
+            throw new ServiceException("获取数据源字段mysql数据源失败,名称：%s,数据源不存在".formatted(beanName));
+        }
+        String schema = null;
+        try {
+            DynamicDsKey.setCurrent(beanName);
+            return mysqlDataSourceMapper.getFields("sss",tableName);
+        } finally {
+            DynamicDsKey.setCurrent("db1");
         }
     }
 }

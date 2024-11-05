@@ -14,7 +14,10 @@ import org.noear.solon.core.BeanWrap;
 import org.noear.solon.core.Props;
 import top.primsnet.sync.business.datasource.service.DataSourceService;
 import top.primsnet.sync.business.datasource.to.CreateDataSourceStrTO;
+import top.primsnet.sync.business.datasource.to.GetDataSourceFieldsTO;
 import top.primsnet.sync.common.exception.ServiceException;
+
+import java.util.List;
 
 /**
  * Author:  joshua
@@ -89,5 +92,17 @@ public class ElasticSearchDataSourceServiceImpl implements DataSourceService {
             throw new ServiceException("卸载es数据源失败,参数校验失败-参数不完整");
         }
         Solon.context().putWrap(beanName, null);
+    }
+
+    /**
+     * 获取数据源字段
+     *
+     * @param beanName  数据源
+     * @param tableName 表明
+     * @return 字段集合
+     */
+    @Override
+    public List<GetDataSourceFieldsTO> getFields(String beanName, String tableName) {
+        return List.of();
     }
 }

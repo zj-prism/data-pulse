@@ -2,4 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="top.primsnet.sync.business.module.pubdatasourceconfig.mapper.PubDataSourceConfigMapper">
 
+    <select id="getFields" resultType="top.primsnet.sync.business.datasource.to.GetDataSourceFieldsTO">
+        select column_name as fieldName,column_comment as fieldAnnotation,data_type as fieldType
+        from information_schema.columns where table_name = 'sys_user'
+    </select>
 </mapper>

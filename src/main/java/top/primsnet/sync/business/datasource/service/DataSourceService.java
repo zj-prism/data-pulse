@@ -2,6 +2,9 @@ package top.primsnet.sync.business.datasource.service;
 
 
 import top.primsnet.sync.business.datasource.to.CreateDataSourceStrTO;
+import top.primsnet.sync.business.datasource.to.GetDataSourceFieldsTO;
+
+import java.util.List;
 
 /**
  * Author: joshua
@@ -30,4 +33,12 @@ public interface DataSourceService {
      * @param beanName bean名称
      */
     void logoutDataSource(String beanName);
+
+    /**
+     * 获取数据源字段
+     * @param beanName 数据源
+     * @param tableName 表明
+     * @return 字段集合
+     */
+    List<GetDataSourceFieldsTO> getFields(String beanName,String tableName);
 }

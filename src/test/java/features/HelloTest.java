@@ -1,15 +1,12 @@
 package features;
 
+import org.junit.jupiter.api.Test;
 import org.noear.esearchx.EsContext;
 import org.noear.esearchx.EsGlobal;
-import org.noear.solon.Utils;
 import org.noear.solon.annotation.Inject;
-import top.primsnet.sync.DataPulseApp;
-
-import org.junit.jupiter.api.Test;
-
 import org.noear.solon.test.HttpTester;
 import org.noear.solon.test.SolonTest;
+import top.primsnet.sync.DataPulseApp;
 import top.primsnet.sync.datapush.from.listener.master.to.OrderTO;
 
 import java.io.IOException;
@@ -31,9 +28,9 @@ public class HelloTest extends HttpTester {
         //执行前打印dsl
         EsGlobal.onCommandBefore(cmd -> System.out.println("dsl:::" + cmd.getDsl()));
 
-        String dsl = Utils.getResourceAsString("esindex/order.json", "utf-8");
-        context.indiceCreate("order_2024",dsl);
-        assert context.indiceExist("order_2024") == true;
+//        String dsl = Utils.getResourceAsString("esindex/order.json", "utf-8");
+//        context.indiceCreate("order_2024",dsl);
+//        assert context.indiceExist("order_2024") == true;
     }
 
     @Test

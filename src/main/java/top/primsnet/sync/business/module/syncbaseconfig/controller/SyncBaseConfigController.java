@@ -71,4 +71,6 @@ public class SyncBaseConfigController {
         syncBaseConfigService.delete(id);
         return Result.ok();
     }
+
+
 }

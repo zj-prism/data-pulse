@@ -1,11 +1,13 @@
 package top.primsnet.sync.business.module.pubdatasourceconfig.service;
 
+import top.primsnet.sync.business.datasource.to.GetDataSourceFieldsTO;
 import top.primsnet.sync.business.module.pubdatasourceconfig.entity.PubDataSourceConfig;
 import top.primsnet.sync.business.module.pubdatasourceconfig.vo.PubDataSourceConfigReqVO;
 import top.primsnet.sync.business.module.pubdatasourceconfig.vo.PubDataSourceConfigResVO;
-import java.util.List;
-import top.primsnet.sync.common.mybatis.base.PageResult;
 import top.primsnet.sync.common.mybatis.base.BaseService;
+import top.primsnet.sync.common.mybatis.base.PageResult;
+
+import java.util.List;
 /**
  * <p>
  * 服务类
@@ -23,4 +25,5 @@ public interface PubDataSourceConfigService extends BaseService<PubDataSourceCon
     void delete(Integer id);
     void loadDataSource(Integer id);
     void unloadDataSource(Integer id);
+    List<GetDataSourceFieldsTO> getFields(Integer id,String tableName);
 }
