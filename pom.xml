@@ -30,7 +30,7 @@
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <binlog4j.version>1.9.1</binlog4j.version>
         <esearchx.version>1.0.25</esearchx.version>
-        <mp.version>3.5.7</mp.version>
+        <mp.version>3.5.9</mp.version>
         <pb-java.version>4.28.3</pb-java.version>
         <json.version>20240303</json.version>
         <freemarker.version>2.3.31</freemarker.version>
