@@ -25,6 +25,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -133,6 +134,7 @@ public class MysqlDataSourceServiceImpl implements DataSourceService {
      */
     @Override
     public List<GetDataSourceFieldsTO> getFields(String beanName, String tableName) {
+        List<GetDataSourceFieldsTO> list = new ArrayList<>();
         if (StrUtil.isEmpty(beanName)) {
             throw new ServiceException("获取数据源字段mysql数据源失败,参数校验失败-参数不完整");
         }
@@ -155,8 +157,11 @@ public class MysqlDataSourceServiceImpl implements DataSourceService {
                 while (resultSet.next()) {
                     //todo 需要提取工具类
                     //todo 组装结果
-                    System.out.println(resultSet.getString("fieldName") + "-"
-                            + resultSet.getString("fieldAnnotation") + "-" + resultSet.getString("fieldType"));
+                    GetDataSourceFieldsTO fieldsTO = new GetDataSourceFieldsTO();
+                    fieldsTO.setFieldName(resultSet.getString("fieldName"));
+                    fieldsTO.setFieldType(resultSet.getString("fieldType"));
+                    fieldsTO.setFieldAnnotation(resultSet.getString("fieldAnnotation"));
+                    list.add(fieldsTO);
                 }
             }
             statement.close();
@@ -180,6 +185,6 @@ public class MysqlDataSourceServiceImpl implements DataSourceService {
             }
             DynamicDsKey.setCurrent("db1");
         }
-        return null;
+        return list;
     }
 }
