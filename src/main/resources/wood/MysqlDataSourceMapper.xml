@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<mapper namespace="top.primsnet.sync.business.datasource.mapper.MysqlDataSourceMapper"
-        import="top.primsnet.sync.business.datasource.to.*">
-    <sql id="getFields" return="List[GetDataSourceFieldsTO]" remarks="获取表字段">
-        select column_name as fieldName,column_comment as fieldAnnotation,data_type as fieldType
-        from information_schema.columns where table_schema = #{schemaName} and  table_name = #{tableName}
-    </sql>
-
-</mapper>

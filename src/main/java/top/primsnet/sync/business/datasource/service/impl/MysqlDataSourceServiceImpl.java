@@ -13,8 +13,6 @@ import org.noear.solon.annotation.Inject;
 import org.noear.solon.core.Props;
 import org.noear.solon.data.dynamicds.DynamicDataSource;
 import org.noear.solon.data.dynamicds.DynamicDsKey;
-import org.noear.wood.annotation.Db;
-import top.primsnet.sync.business.datasource.mapper.MysqlDataSourceMapper;
 import top.primsnet.sync.business.datasource.service.DataSourceService;
 import top.primsnet.sync.business.datasource.to.CreateDataSourceStrTO;
 import top.primsnet.sync.business.datasource.to.GetDataSourceFieldsTO;
@@ -40,9 +38,6 @@ public class MysqlDataSourceServiceImpl implements DataSourceService {
 
     @Inject
     DynamicDataSource dds;
-
-    @Db("db1")
-    MysqlDataSourceMapper mysqlDataSourceMapper;
 
     /**
      * 创建数据源的动态加载json
