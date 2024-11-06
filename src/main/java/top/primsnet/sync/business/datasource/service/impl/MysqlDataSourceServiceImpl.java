@@ -149,8 +149,9 @@ public class MysqlDataSourceServiceImpl implements DataSourceService {
             DynamicDsKey.setCurrent(beanName);
             connection = dataSource.getConnection();
             statement = connection.createStatement();
-            String sql = "select column_name as fieldName,column_comment as fieldAnnotation,data_type as fieldType\n" +
-                    " from information_schema.columns where table_schema = 'sss' and  table_name = 'test'";
+            String sql = "select column_name as fieldName,column_comment as fieldAnnotation,data_type as fieldType " +
+                    "from information_schema.columns where table_name = '{}'";
+            sql = StrUtil.format(sql, tableName);
             boolean execute = statement.execute(sql);
             if (execute) {
                 ResultSet resultSet = statement.getResultSet();
