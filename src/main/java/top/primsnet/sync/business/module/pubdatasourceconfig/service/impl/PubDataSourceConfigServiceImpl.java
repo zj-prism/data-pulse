@@ -153,9 +153,7 @@ public class PubDataSourceConfigServiceImpl extends BaseServiceImpl<PubDataSourc
         if (ObjUtil.isEmpty(dataSourceTypeEnum)){
             throw new ServiceException("当前数据源未兼容");
         }
-//        this.baseMapper.getFields(tableName);
         return dataSourceServiceContext.getService(dataSourceTypeEnum.getRemark()).getFields(entity.getName(),tableName);
-//        return List.of();
     }
 
     private QueryWrapper<PubDataSourceConfig> getQueryWrapper(PubDataSourceConfigReqVO reqVO) {
