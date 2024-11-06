@@ -1,18 +1,18 @@
 package top.primsnet.sync.business.module.syncfieldsconfig.service.impl;
 
-import top.primsnet.sync.business.module.syncfieldsconfig.entity.SyncFieldsConfig;
-import top.primsnet.sync.business.module.syncfieldsconfig.service.SyncFieldsConfigService;
-import top.primsnet.sync.business.module.syncfieldsconfig.vo.SyncFieldsConfigReqVO;
-import top.primsnet.sync.business.module.syncfieldsconfig.vo.SyncFieldsConfigResVO;
-import top.primsnet.sync.business.module.syncfieldsconfig.convert.SyncFieldsConfigConvert;
-import top.primsnet.sync.business.module.syncfieldsconfig.mapper.SyncFieldsConfigMapper;
 import cn.hutool.core.util.ObjUtil;
-import top.primsnet.sync.common.mybatis.base.BaseServiceImpl;
-import top.primsnet.sync.common.mybatis.base.PageResult;
-import top.primsnet.sync.common.mybatis.page.PageProcess;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.ApiOperation;
 import org.noear.solon.annotation.Component;
+import top.primsnet.sync.business.module.syncfieldsconfig.convert.SyncFieldsConfigConvert;
+import top.primsnet.sync.business.module.syncfieldsconfig.entity.SyncFieldsConfig;
+import top.primsnet.sync.business.module.syncfieldsconfig.mapper.SyncFieldsConfigMapper;
+import top.primsnet.sync.business.module.syncfieldsconfig.service.SyncFieldsConfigService;
+import top.primsnet.sync.business.module.syncfieldsconfig.vo.SyncFieldsConfigReqVO;
+import top.primsnet.sync.business.module.syncfieldsconfig.vo.SyncFieldsConfigResVO;
+import top.primsnet.sync.common.mybatis.base.BaseServiceImpl;
+import top.primsnet.sync.common.mybatis.base.PageResult;
+import top.primsnet.sync.common.mybatis.page.PageProcess;
 
 import java.util.List;
 
@@ -51,6 +51,15 @@ public class SyncFieldsConfigServiceImpl extends BaseServiceImpl<SyncFieldsConfi
         SyncFieldsConfig entity = SyncFieldsConfigConvert.INSTANCE.convert(reqVO);
         save(entity);
      }
+
+    /**
+     * @param reqVO
+     */
+    @Override
+    public void addAll(List<SyncFieldsConfigReqVO> reqVO) {
+        List<SyncFieldsConfig> syncFieldsConfigs = SyncFieldsConfigConvert.INSTANCE.convertAll(reqVO);
+        saveBatch(syncFieldsConfigs);
+    }
 
      @Override
      @ApiOperation("编辑")

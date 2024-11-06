@@ -1,11 +1,13 @@
 package top.primsnet.sync.business.module.syncbaseconfig.service;
 
 import top.primsnet.sync.business.module.syncbaseconfig.entity.SyncBaseConfig;
+import top.primsnet.sync.business.module.syncbaseconfig.vo.FieldBindReqVO;
 import top.primsnet.sync.business.module.syncbaseconfig.vo.SyncBaseConfigReqVO;
 import top.primsnet.sync.business.module.syncbaseconfig.vo.SyncBaseConfigResVO;
-import java.util.List;
-import top.primsnet.sync.common.mybatis.base.PageResult;
 import top.primsnet.sync.common.mybatis.base.BaseService;
+import top.primsnet.sync.common.mybatis.base.PageResult;
+
+import java.util.List;
 /**
  * <p>
  * 服务类
@@ -21,4 +23,5 @@ public interface SyncBaseConfigService extends BaseService<SyncBaseConfig> {
     void add(SyncBaseConfigReqVO reqVO);
     void edit(SyncBaseConfigReqVO reqVO);
     void delete(Integer id);
+    void fieldBind(Integer id, List<FieldBindReqVO> reqVOs);
 }

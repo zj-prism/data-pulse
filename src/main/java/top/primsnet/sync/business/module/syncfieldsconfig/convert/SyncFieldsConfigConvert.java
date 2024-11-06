@@ -1,10 +1,10 @@
 package top.primsnet.sync.business.module.syncfieldsconfig.convert;
 
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 import top.primsnet.sync.business.module.syncfieldsconfig.entity.SyncFieldsConfig;
 import top.primsnet.sync.business.module.syncfieldsconfig.vo.SyncFieldsConfigReqVO;
 import top.primsnet.sync.business.module.syncfieldsconfig.vo.SyncFieldsConfigResVO;
-import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 /**
@@ -21,6 +21,7 @@ public interface SyncFieldsConfigConvert{
     SyncFieldsConfig convert(SyncFieldsConfigReqVO reqVO);
     SyncFieldsConfigResVO convert(SyncFieldsConfig reqVO);
     List<SyncFieldsConfigResVO> convert(List<SyncFieldsConfig> reqVO);
+    List<SyncFieldsConfig> convertAll(List<SyncFieldsConfigReqVO> reqVO);
 }
 
 

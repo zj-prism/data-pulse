@@ -5,16 +5,22 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.ApiOperation;
 import org.noear.solon.annotation.Component;
+import org.noear.solon.annotation.Inject;
 import top.primsnet.sync.business.module.syncbaseconfig.convert.SyncBaseConfigConvert;
 import top.primsnet.sync.business.module.syncbaseconfig.entity.SyncBaseConfig;
 import top.primsnet.sync.business.module.syncbaseconfig.mapper.SyncBaseConfigMapper;
 import top.primsnet.sync.business.module.syncbaseconfig.service.SyncBaseConfigService;
+import top.primsnet.sync.business.module.syncbaseconfig.vo.FieldBindReqVO;
 import top.primsnet.sync.business.module.syncbaseconfig.vo.SyncBaseConfigReqVO;
 import top.primsnet.sync.business.module.syncbaseconfig.vo.SyncBaseConfigResVO;
+import top.primsnet.sync.business.module.syncfieldsconfig.service.SyncFieldsConfigService;
+import top.primsnet.sync.business.module.syncfieldsconfig.vo.SyncFieldsConfigReqVO;
+import top.primsnet.sync.common.exception.ServiceException;
 import top.primsnet.sync.common.mybatis.base.BaseServiceImpl;
 import top.primsnet.sync.common.mybatis.base.PageResult;
 import top.primsnet.sync.common.mybatis.page.PageProcess;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,6 +33,10 @@ import java.util.List;
  */
 @Component
 public class SyncBaseConfigServiceImpl extends BaseServiceImpl<SyncBaseConfigMapper, SyncBaseConfig> implements SyncBaseConfigService {
+
+    @Inject
+    SyncFieldsConfigService fieldsConfigService;
+
     @Override
     @ApiOperation("分页")
     public PageResult<SyncBaseConfigResVO> page(SyncBaseConfigReqVO reqVO) {
@@ -66,8 +76,36 @@ public class SyncBaseConfigServiceImpl extends BaseServiceImpl<SyncBaseConfigMap
        removeById(id);
      }
 
+    /**
+     * @param id 基础配置ID
+     * @param reqVOs 绑定关系
+     */
+    @Override
+    public void fieldBind(Integer id, List<FieldBindReqVO> reqVOs) {
+        if (ObjUtil.hasEmpty(id,reqVOs)){
+            throw new ServiceException("绑定失败,参数校验异常,ID不存在");
+        }
+        //校验
+        SyncBaseConfig baseConfig = getById(id);
+        if (ObjUtil.isEmpty(baseConfig)){
+            throw new ServiceException("绑定失败,校验异常,当前配置不存在");
+        }
+        //保存关联关系
+        List<SyncFieldsConfigReqVO> list = new ArrayList<>();
+        for (FieldBindReqVO bindReqVO : reqVOs) {
+            SyncFieldsConfigReqVO fieldsConfigReqVO = new SyncFieldsConfigReqVO();
+            fieldsConfigReqVO.setBaseId(id);
+            fieldsConfigReqVO.setFromField(bindReqVO.getFromFieldName());
+            fieldsConfigReqVO.setToField(bindReqVO.getToFieldName());
+            fieldsConfigReqVO.setTransType(bindReqVO.getTransType());
+            fieldsConfigReqVO.setFromFieldType(bindReqVO.getFromFieldType());
+            fieldsConfigReqVO.setToFieldType(bindReqVO.getToFieldType());
+            list.add(fieldsConfigReqVO);
+        }
+        fieldsConfigService.addAll(list);
+    }
 
-     private QueryWrapper<SyncBaseConfig> getQueryWrapper(SyncBaseConfigReqVO reqVO) {
+    private QueryWrapper<SyncBaseConfig> getQueryWrapper(SyncBaseConfigReqVO reqVO) {
         QueryWrapper<SyncBaseConfig> queryWrapper = new QueryWrapper<>();
         if (ObjUtil.isNotEmpty(reqVO)){
             if (StrUtil.isNotEmpty(reqVO.getName())){

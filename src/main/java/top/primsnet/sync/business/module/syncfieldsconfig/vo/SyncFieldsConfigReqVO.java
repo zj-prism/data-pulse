@@ -1,6 +1,7 @@
 package top.primsnet.sync.business.module.syncfieldsconfig.vo;
-import lombok.Data;
+
 import io.swagger.annotations.ApiModel;
+import lombok.Data;
 import top.primsnet.sync.common.mybatis.base.BaseQuery;
 
 /**
@@ -24,7 +25,9 @@ public class SyncFieldsConfigReqVO extends BaseQuery {
 
     private String toField;
 
-    private String fieldType;
+    private String fromFieldType;
+
+    private String toFieldType;
 
     private String transType;
 

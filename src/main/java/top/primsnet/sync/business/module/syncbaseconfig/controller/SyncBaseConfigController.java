@@ -5,8 +5,10 @@ import io.swagger.annotations.ApiOperation;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Inject;
 import org.noear.solon.annotation.Mapping;
+import org.noear.solon.annotation.Path;
 import org.noear.solon.core.handle.MethodType;
 import top.primsnet.sync.business.module.syncbaseconfig.service.SyncBaseConfigService;
+import top.primsnet.sync.business.module.syncbaseconfig.vo.FieldBindReqVO;
 import top.primsnet.sync.business.module.syncbaseconfig.vo.SyncBaseConfigReqVO;
 import top.primsnet.sync.business.module.syncbaseconfig.vo.SyncBaseConfigResVO;
 import top.primsnet.sync.common.mybatis.base.PageResult;
@@ -72,5 +74,11 @@ public class SyncBaseConfigController {
         return Result.ok();
     }
 
+    @Mapping(value = "fieldBind/{id}",method = MethodType.POST)
+    @ApiOperation("字段绑定")
+    public Result<String> fieldBind(@Path("id")Integer id, List<FieldBindReqVO> reqVOs){
+        syncBaseConfigService.fieldBind(id,reqVOs);
+        return Result.ok();
+    }
 
 }

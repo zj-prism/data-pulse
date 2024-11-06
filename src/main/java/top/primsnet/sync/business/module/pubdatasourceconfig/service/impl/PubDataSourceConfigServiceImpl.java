@@ -139,8 +139,9 @@ public class PubDataSourceConfigServiceImpl extends BaseServiceImpl<PubDataSourc
     }
 
     /**
-     * @param tableName
-     * @return
+     * 获取数据源表字段
+     * @param tableName 表名称
+     * @return 字段集合
      */
     @Override
     public List<GetDataSourceFieldsTO> getFields(Integer id,String tableName) {
