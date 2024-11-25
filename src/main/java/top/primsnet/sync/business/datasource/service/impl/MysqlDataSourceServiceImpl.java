@@ -113,7 +113,6 @@ public class MysqlDataSourceServiceImpl implements DataSourceService {
         DataSource dataSource = dds.getTargetDataSource(beanName);
         if (ObjUtil.isEmpty(dataSource)) {
             log.warn("卸载mysql数据源失败,名称：%s,数据源不存在,请确认服务是否正常".formatted(beanName));
-//            throw new ServiceException("卸载mysql数据源失败,名称：%s,数据源不存在".formatted(beanName));
         }
         //卸载数据源
         try {
@@ -134,15 +133,25 @@ public class MysqlDataSourceServiceImpl implements DataSourceService {
      */
     @Override
     public List<GetDataSourceFieldsTO> getFields(String beanName, String tableName) {
-        List<GetDataSourceFieldsTO> list = new ArrayList<>();
         if (StrUtil.isEmpty(beanName)) {
             throw new ServiceException("获取数据源字段mysql数据源失败,参数校验失败-参数不完整");
         }
+        return getFieldsExec(beanName, tableName);
+    }
+
+    /**
+     * 获取mysql表字段
+     * @param beanName bean名称
+     * @param tableName 表名称
+     * @return
+     */
+    private List<GetDataSourceFieldsTO> getFieldsExec(String beanName, String tableName) {
         //获取数据源
         DataSource dataSource = dds.getTargetDataSource(beanName);
         if (ObjUtil.isEmpty(dataSource)) {
             throw new ServiceException("获取数据源字段mysql数据源失败,名称：%s,数据源不存在".formatted(beanName));
         }
+        List<GetDataSourceFieldsTO> list = new ArrayList<>();
         Connection connection =null;
         Statement statement =null;
         try {
