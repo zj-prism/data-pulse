@@ -3,6 +3,7 @@ package top.primsnet.sync.business.datasource.service.impl;
 import cn.hutool.core.exceptions.ExceptionUtil;
 import cn.hutool.core.util.ObjUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.db.Entity;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.zaxxer.hikari.HikariDataSource;
@@ -16,6 +17,7 @@ import org.noear.solon.data.dynamicds.DynamicDsKey;
 import top.primsnet.sync.business.datasource.service.DataSourceService;
 import top.primsnet.sync.business.datasource.to.CreateDataSourceStrTO;
 import top.primsnet.sync.business.datasource.to.GetDataSourceFieldsTO;
+import top.primsnet.sync.business.datasource.utils.MysqlSqlExecuteUtil;
 import top.primsnet.sync.common.enums.SysCommonEnum;
 import top.primsnet.sync.common.exception.ServiceException;
 
@@ -27,6 +29,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Author: joshua
@@ -147,52 +150,25 @@ public class MysqlDataSourceServiceImpl implements DataSourceService {
      */
     private List<GetDataSourceFieldsTO> getFieldsExec(String beanName, String tableName) {
         //获取数据源
-        DataSource dataSource = dds.getTargetDataSource(beanName);
-        if (ObjUtil.isEmpty(dataSource)) {
-            throw new ServiceException("获取数据源字段mysql数据源失败,名称：%s,数据源不存在".formatted(beanName));
-        }
-        List<GetDataSourceFieldsTO> list = new ArrayList<>();
-        Connection connection =null;
-        Statement statement =null;
+        List<GetDataSourceFieldsTO> list;
         try {
-            DynamicDsKey.setCurrent(beanName);
-            connection = dataSource.getConnection();
-            statement = connection.createStatement();
+            DataSource dataSource = dds.getTargetDataSource(beanName);
+            if (ObjUtil.isEmpty(dataSource)) {
+                throw new ServiceException("获取数据源字段mysql数据源失败,名称：%s,数据源不存在".formatted(beanName));
+            }
+            list = new ArrayList<>();
             String sql = "select column_name as fieldName,column_comment as fieldAnnotation,data_type as fieldType " +
                     "from information_schema.columns where table_name = '{}'";
             sql = StrUtil.format(sql, tableName);
-            boolean execute = statement.execute(sql);
-            if (execute) {
-                ResultSet resultSet = statement.getResultSet();
-                while (resultSet.next()) {
-                    //todo 需要提取工具类
-                    //todo 组装结果
-                    GetDataSourceFieldsTO fieldsTO = new GetDataSourceFieldsTO();
-                    fieldsTO.setFieldName(resultSet.getString("fieldName"));
-                    fieldsTO.setFieldType(resultSet.getString("fieldType"));
-                    fieldsTO.setFieldAnnotation(resultSet.getString("fieldAnnotation"));
-                    list.add(fieldsTO);
-                }
+            List<Entity> dataList = MysqlSqlExecuteUtil.exec(dataSource, sql);
+            for (Entity data : dataList) {
+                GetDataSourceFieldsTO fieldsTO = new GetDataSourceFieldsTO();
+                fieldsTO.setFieldName(data.getStr("fieldName"));
+                fieldsTO.setFieldType(data.getStr("fieldType"));
+                fieldsTO.setFieldAnnotation(data.getStr("fieldAnnotation"));
+                list.add(fieldsTO);
             }
-            statement.close();
-            connection.close();
-        } catch (Exception e) {
-            log.error("执行获取mysql字段异常,表:{},异常:{}", tableName, ExceptionUtil.stacktraceToString(e));
         } finally {
-            if (ObjUtil.isNotNull(statement)){
-                try {
-                    statement.close();
-                } catch (SQLException e) {
-                    log.error("关闭statement异常:{}",ExceptionUtil.stacktraceToString(e));
-                }
-            }
-            if (ObjUtil.isNotNull(connection)){
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    log.error("关闭connection异常:{}",ExceptionUtil.stacktraceToString(e));
-                }
-            }
             DynamicDsKey.setCurrent("db1");
         }
         return list;
