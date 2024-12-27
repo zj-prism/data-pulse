@@ -16,6 +16,7 @@ import top.primsnet.sync.business.module.pubdatasourceconfig.mapper.PubDataSourc
 import top.primsnet.sync.business.module.pubdatasourceconfig.service.PubDataSourceConfigService;
 import top.primsnet.sync.business.module.pubdatasourceconfig.vo.PubDataSourceConfigReqVO;
 import top.primsnet.sync.business.module.pubdatasourceconfig.vo.PubDataSourceConfigResVO;
+import top.primsnet.sync.common.enums.DataSourceLoadStatusTypeEnum;
 import top.primsnet.sync.common.enums.DataSourceTypeEnum;
 import top.primsnet.sync.common.enums.SysCommonEnum;
 import top.primsnet.sync.common.exception.ServiceException;
@@ -62,6 +63,8 @@ public class PubDataSourceConfigServiceImpl extends BaseServiceImpl<PubDataSourc
      @ApiOperation("新增")
      @Tran
      public void add(PubDataSourceConfigReqVO reqVO) {
+        //默认未装载
+        reqVO.setLoadStatus(DataSourceLoadStatusTypeEnum.NOLOADING.getValue());
         PubDataSourceConfig entity = PubDataSourceConfigConvert.INSTANCE.convert(reqVO);
         //封装数据源加载json
          CreateDataSourceStrTO dataSourceStrTO = new CreateDataSourceStrTO();
@@ -70,7 +73,7 @@ public class PubDataSourceConfigServiceImpl extends BaseServiceImpl<PubDataSourc
          dataSourceStrTO.setUrl(reqVO.getUrl());
          dataSourceStrTO.setUserName(reqVO.getUserName());
          dataSourceStrTO.setPassword(reqVO.getPassword());
-         String dataSourceStr = dataSourceServiceContext.getService(DataSourceTypeEnum.MYSQL.getRemark()).createDataSourceStr(dataSourceStrTO);
+         String dataSourceStr = dataSourceServiceContext.getService(DataSourceTypeEnum.getByValue(reqVO.getType()).getRemark()).createDataSourceStr(dataSourceStrTO);
          entity.setConfigJsonStr(dataSourceStr);
          save(entity);
      }
@@ -163,7 +166,7 @@ public class PubDataSourceConfigServiceImpl extends BaseServiceImpl<PubDataSourc
             if (StrUtil.isNotBlank(reqVO.getName())){
                 queryWrapper.lambda().like(PubDataSourceConfig::getName,reqVO.getName());
             }
-            if (StrUtil.isNotBlank(reqVO.getLoadStatus())){
+            if (ObjUtil.isNotEmpty(reqVO.getLoadStatus())){
                 queryWrapper.lambda().eq(PubDataSourceConfig::getLoadStatus,reqVO.getLoadStatus());
             }
         }

@@ -13,6 +13,7 @@ import top.primsnet.sync.business.datasource.to.CreateDataSourceStrTO;
 import top.primsnet.sync.business.module.pubdatasourceconfig.service.PubDataSourceConfigService;
 import top.primsnet.sync.business.module.pubdatasourceconfig.vo.PubDataSourceConfigReqVO;
 import top.primsnet.sync.business.module.pubdatasourceconfig.vo.PubDataSourceConfigResVO;
+import top.primsnet.sync.common.enums.DataSourceLoadStatusTypeEnum;
 import top.primsnet.sync.common.enums.DataSourceTypeEnum;
 import top.primsnet.sync.common.exception.ServiceException;
 
@@ -35,7 +36,7 @@ public class AppLoadEndEventImpl implements EventListener<AppLoadEndEvent> {
     public void onEvent(AppLoadEndEvent event) {
         try {
             PubDataSourceConfigReqVO reqVO = new PubDataSourceConfigReqVO();
-            reqVO.setLoadStatus("1");
+            reqVO.setLoadStatus(DataSourceLoadStatusTypeEnum.LOADING.getValue());
             List<PubDataSourceConfigResVO> list = pubDataSourceConfigService.list(reqVO);
             for (PubDataSourceConfigResVO entity : list) {
                 if (ObjUtil.isEmpty(entity)){

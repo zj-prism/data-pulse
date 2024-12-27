@@ -19,6 +19,8 @@ public class CreateDataSourceStrTO {
     private String userName;
     //密码
     private String password;
+    //装载状态
+    private String loadStatus;
 
 
 }

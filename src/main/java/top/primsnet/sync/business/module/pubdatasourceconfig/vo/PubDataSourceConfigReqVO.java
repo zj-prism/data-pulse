@@ -31,6 +31,6 @@ public class PubDataSourceConfigReqVO extends BaseQuery {
 
     private String configJsonStr;
 
-    private String loadStatus;
+    private Integer loadStatus;
 
 }

@@ -1,6 +1,7 @@
 package top.primsnet.sync.common.enums;
 
 import lombok.Getter;
+import top.primsnet.sync.common.exception.ServiceException;
 
 /**
  * Author: joshua
@@ -36,7 +37,7 @@ public enum DataSourceTypeEnum {
                 return dataSourceTypeEnum;
             }
         }
-        return null;
+        throw new ServiceException("该类型数据源未实现");
     }
 
 }

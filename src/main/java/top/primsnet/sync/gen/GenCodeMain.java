@@ -31,7 +31,7 @@ public class GenCodeMain {
         String projectName="primsnet";
         for(String table:tables ){
             // 使用 FastAutoGenerator 快速配置代码生成器
-            FastAutoGenerator.create("jdbc:sqlite:/Users/joshua/IdeaProjects/projects/datapulse.db", "", "")
+            FastAutoGenerator.create("jdbc:sqlite:D:\\Works\\datapulse.db", "", "")
                     .globalConfig(builder -> {
                         builder.author(author) // 设置作者
                                 .outputDir("src/main/java")
