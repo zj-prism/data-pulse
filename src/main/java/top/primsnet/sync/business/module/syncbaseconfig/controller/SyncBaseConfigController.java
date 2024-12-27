@@ -8,6 +8,7 @@ import org.noear.solon.annotation.Mapping;
 import org.noear.solon.annotation.Path;
 import org.noear.solon.core.handle.MethodType;
 import top.primsnet.sync.business.module.syncbaseconfig.service.SyncBaseConfigService;
+import top.primsnet.sync.business.module.syncbaseconfig.vo.DataSourcesListResVO;
 import top.primsnet.sync.business.module.syncbaseconfig.vo.FieldBindReqVO;
 import top.primsnet.sync.business.module.syncbaseconfig.vo.SyncBaseConfigReqVO;
 import top.primsnet.sync.business.module.syncbaseconfig.vo.SyncBaseConfigResVO;
@@ -81,4 +82,23 @@ public class SyncBaseConfigController {
         return Result.ok();
     }
 
+    @Mapping(value = "getDataSourcesList",method = MethodType.GET)
+    @ApiOperation("列表")
+    public Result<List<DataSourcesListResVO>> getDataSourcesList(){
+        return Result.ok(syncBaseConfigService.getDataSourcesList());
+    }
+
+    @Mapping(value = "loadDataSource/{id}",method = MethodType.GET)
+    @ApiOperation("加载数据源")
+    public Result<String> loadDataSource(@Path("id") Integer id){
+        syncBaseConfigService.loadDataSource(id);
+        return Result.ok();
+    }
+
+    @Mapping(value = "unloadDataSource/{id}",method = MethodType.GET)
+    @ApiOperation("卸载数据源")
+    public Result<String> unloadDataSource(@Path("id") Integer id){
+        syncBaseConfigService.unloadDataSource(id);
+        return Result.ok();
+    }
 }

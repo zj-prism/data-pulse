@@ -19,6 +19,8 @@ public class SyncTableConfigResVO {
 
     private Integer baseId;
 
+    private Integer syncType;
+
     private String fromTable;
 
     private String toTable;

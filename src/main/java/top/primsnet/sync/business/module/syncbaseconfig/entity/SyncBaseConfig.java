@@ -21,7 +21,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @TableName("sync_base_config")
-@ApiModel(value = "SyncBaseConfig对象", description = "")
+@ApiModel(value = "SyncBaseConfig对象", description = "同步配置-基础配置、数据源关联关系")
 public class SyncBaseConfig implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -4,6 +4,8 @@ import lombok.Data;
 import io.swagger.annotations.ApiModel;
 import top.primsnet.sync.common.mybatis.base.BaseQuery;
 
+import java.util.List;
+
 /**
  * <p>
  * 
@@ -18,6 +20,8 @@ import top.primsnet.sync.common.mybatis.base.BaseQuery;
 public class PubDataSourceConfigReqVO extends BaseQuery {
 
     private Integer id;
+
+    private List<Integer> ids;
 
     private String name;
 

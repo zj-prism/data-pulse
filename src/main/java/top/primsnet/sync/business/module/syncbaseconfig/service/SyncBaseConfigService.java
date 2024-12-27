@@ -1,6 +1,7 @@
 package top.primsnet.sync.business.module.syncbaseconfig.service;
 
 import top.primsnet.sync.business.module.syncbaseconfig.entity.SyncBaseConfig;
+import top.primsnet.sync.business.module.syncbaseconfig.vo.DataSourcesListResVO;
 import top.primsnet.sync.business.module.syncbaseconfig.vo.FieldBindReqVO;
 import top.primsnet.sync.business.module.syncbaseconfig.vo.SyncBaseConfigReqVO;
 import top.primsnet.sync.business.module.syncbaseconfig.vo.SyncBaseConfigResVO;
@@ -24,4 +25,10 @@ public interface SyncBaseConfigService extends BaseService<SyncBaseConfig> {
     void edit(SyncBaseConfigReqVO reqVO);
     void delete(Integer id);
     void fieldBind(Integer id, List<FieldBindReqVO> reqVOs);
+
+    List<DataSourcesListResVO> getDataSourcesList();
+
+    void loadDataSource(Integer id);
+
+    void unloadDataSource(Integer id);
 }

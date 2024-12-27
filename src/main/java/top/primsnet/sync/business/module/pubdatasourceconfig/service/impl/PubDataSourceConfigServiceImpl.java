@@ -81,7 +81,7 @@ public class PubDataSourceConfigServiceImpl extends BaseServiceImpl<PubDataSourc
      @Override
      @ApiOperation("编辑")
      public void edit(PubDataSourceConfigReqVO reqVO) {
-        PubDataSourceConfig entity = PubDataSourceConfigConvert.INSTANCE.convert(reqVO);
+         PubDataSourceConfig entity = PubDataSourceConfigConvert.INSTANCE.convert(reqVO);
          //封装数据源加载json
          CreateDataSourceStrTO dataSourceStrTO = new CreateDataSourceStrTO();
          dataSourceStrTO.setType(DataSourceTypeEnum.MYSQL.getValue());

@@ -31,6 +31,12 @@ public class SyncBaseConfigResVO {
     //目标
     private Integer toId;
 
+    //来源数据源名称
+    private String fromIdStr;
+
+    //目标数据源名称
+    private String toIdStr;
+
     //状态
     private Integer status;
 

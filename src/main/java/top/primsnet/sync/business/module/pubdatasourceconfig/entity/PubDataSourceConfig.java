@@ -21,7 +21,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @TableName("pub_data_source_config")
-@ApiModel(value = "PubDataSourceConfig对象", description = "")
+@ApiModel(value = "PubDataSourceConfig对象", description = "数据源配置")
 public class PubDataSourceConfig implements Serializable {
 
     private static final long serialVersionUID = 1L;

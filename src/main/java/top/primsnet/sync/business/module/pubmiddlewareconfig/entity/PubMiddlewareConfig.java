@@ -21,7 +21,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @TableName("pub_middleware_config")
-@ApiModel(value = "PubMiddlewareConfig对象", description = "")
+@ApiModel(value = "PubMiddlewareConfig对象", description = "中间件配置")
 public class PubMiddlewareConfig implements Serializable {
 
     private static final long serialVersionUID = 1L;

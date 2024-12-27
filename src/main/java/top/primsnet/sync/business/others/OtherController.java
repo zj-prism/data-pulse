@@ -48,6 +48,8 @@ public class OtherController {
         routes.add("document");
         routes.add("pagination");
         routes.add("pub");
+        routes.add("sync");
+        routes.add("dataSync");
         routes.add("dataSource");
         routes.add("middleware");
         routes.add("edit");

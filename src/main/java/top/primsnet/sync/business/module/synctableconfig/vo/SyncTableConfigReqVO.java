@@ -20,6 +20,8 @@ public class SyncTableConfigReqVO extends BaseQuery {
 
     private Integer baseId;
 
+    private Integer syncType;
+
     private String fromTable;
 
     private String toTable;

@@ -21,7 +21,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @TableName("sync_fields_config")
-@ApiModel(value = "SyncFieldsConfig对象", description = "")
+@ApiModel(value = "SyncFieldsConfig对象", description = "同步配置-字段关联关系")
 public class SyncFieldsConfig implements Serializable {
 
     private static final long serialVersionUID = 1L;
