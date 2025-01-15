@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.ApiOperation;
 import org.noear.solon.annotation.Component;
 import org.noear.solon.annotation.Inject;
-import top.primsnet.sync.business.module.pubdatasourceconfig.entity.PubDataSourceConfig;
 import top.primsnet.sync.business.module.pubdatasourceconfig.service.PubDataSourceConfigService;
 import top.primsnet.sync.business.module.pubdatasourceconfig.vo.PubDataSourceConfigReqVO;
 import top.primsnet.sync.business.module.pubdatasourceconfig.vo.PubDataSourceConfigResVO;
@@ -172,7 +171,7 @@ public class SyncBaseConfigServiceImpl extends BaseServiceImpl<SyncBaseConfigMap
     }
 
     @Override
-    public void loadDataSource(Integer id) {
+    public void loadStatus(Integer id) {
         SyncBaseConfig entity = getById(id);
         if (ObjUtil.isEmpty(entity)){
             throw new ServiceException("开启同步配置失败,该配置不存在");
@@ -184,7 +183,7 @@ public class SyncBaseConfigServiceImpl extends BaseServiceImpl<SyncBaseConfigMap
     }
 
     @Override
-    public void unloadDataSource(Integer id) {
+    public void unloadStatus(Integer id) {
         SyncBaseConfig entity = getById(id);
         if (ObjUtil.isEmpty(entity)){
             throw new ServiceException("开启同步配置失败,该配置不存在");

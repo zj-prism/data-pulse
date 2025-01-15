@@ -28,7 +28,7 @@ public interface SyncBaseConfigService extends BaseService<SyncBaseConfig> {
 
     List<DataSourcesListResVO> getDataSourcesList();
 
-    void loadDataSource(Integer id);
+    void loadStatus(Integer id);
 
-    void unloadDataSource(Integer id);
+    void unloadStatus(Integer id);
 }

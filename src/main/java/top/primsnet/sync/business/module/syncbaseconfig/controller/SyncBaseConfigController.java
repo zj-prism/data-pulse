@@ -88,17 +88,17 @@ public class SyncBaseConfigController {
         return Result.ok(syncBaseConfigService.getDataSourcesList());
     }
 
-    @Mapping(value = "loadDataSource/{id}",method = MethodType.GET)
-    @ApiOperation("加载数据源")
-    public Result<String> loadDataSource(@Path("id") Integer id){
-        syncBaseConfigService.loadDataSource(id);
+    @Mapping(value = "loadStatus/{id}",method = MethodType.GET)
+    @ApiOperation("加载同步状态")
+    public Result<String> loadStatus(@Path("id") Integer id){
+        syncBaseConfigService.loadStatus(id);
         return Result.ok();
     }
 
-    @Mapping(value = "unloadDataSource/{id}",method = MethodType.GET)
-    @ApiOperation("卸载数据源")
-    public Result<String> unloadDataSource(@Path("id") Integer id){
-        syncBaseConfigService.unloadDataSource(id);
+    @Mapping(value = "unloadStatus/{id}",method = MethodType.GET)
+    @ApiOperation("卸载同步状态")
+    public Result<String> unloadStatus(@Path("id") Integer id){
+        syncBaseConfigService.unloadStatus(id);
         return Result.ok();
     }
 }
