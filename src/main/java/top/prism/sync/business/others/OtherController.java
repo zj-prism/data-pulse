@@ -49,7 +49,8 @@ public class OtherController {
         routes.add("pagination");
         routes.add("pub");
         routes.add("sync");
-        routes.add("dataSync");
+        routes.add("dataSyncBaseConfig");
+        routes.add("dataSyncTableConfig");
         routes.add("dataSource");
         routes.add("middleware");
         routes.add("edit");
