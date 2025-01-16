@@ -3,7 +3,7 @@ server.port: 9999
 #contextPath
 server.contextPath: /api
 solon.app:
-  name: 'top.primsnet'
+  name: 'top.prism'
   group: 'prims'
 solon.env: dev
 #配置后台管理mysql数据库
@@ -41,9 +41,9 @@ test.esx:
 #配置mybatis-plus
 mybatis.db1:
   typeAliases:
-    - "top.primsnet.sync.business.**.vo"
+    - "top.prism.sync.business.**.vo"
   mappers:
-    - "top.primsnet.sync.business.**.mapper"
+    - "top.prism.sync.business.**.mapper"
   configuration:
     cacheEnabled: false
     mapperVerifyEnabled: false
@@ -52,7 +52,7 @@ mybatis.db1:
     #logImpl: org.apache.ibatis.logging.stdout.StdOutImpl
   globalConfig:
     banner: false
-    metaObjectHandler: "top.primsnet.sync.config.mp.MetaObjectHandlerImpl"
+    metaObjectHandler: "top.prism.sync.config.mp.MetaObjectHandlerImpl"
     dbConfig:
       logicDeleteField: "deleted"
       logicDeleteValue: "2"
@@ -68,7 +68,7 @@ pagehelper:
 
 --- ### 接口文档配置
 springdoc:
-  def-package: top.primsnet.sync.business
+  def-package: top.prism.sync.business
   default-flat-param-object: true
 #引入其他配置文件
 solon:

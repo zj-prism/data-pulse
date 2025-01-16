@@ -4,8 +4,8 @@ import ${package.Entity}.${entity};
 import ${package.Parent}.vo.${entity}ReqVO;
 import ${package.Parent}.vo.${entity}ResVO;
 import java.util.List;
-import top.primsnet.sync.common.mybatis.base.PageResult;
-import top.primsnet.sync.common.mybatis.base.BaseService;
+import top.prims.sync.common.mybatis.base.PageResult;
+import top.prims.sync.common.mybatis.base.BaseService;
 /**
  * <p>
  * 服务类

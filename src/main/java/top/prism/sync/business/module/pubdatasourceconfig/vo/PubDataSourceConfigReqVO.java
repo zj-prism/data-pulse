@@ -1,0 +1,39 @@
+package top.prism.sync.business.module.pubdatasourceconfig.vo;
+import lombok.Data;
+import io.swagger.annotations.ApiModel;
+import top.prism.sync.common.mybatis.base.BaseQuery;
+
+import java.util.List;
+
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * Author joshua
+ * @since 2024-07-30 14:30:12
+ */
+
+@Data
+@ApiModel(value = "PubDataSourceConfigReqVO")
+public class PubDataSourceConfigReqVO extends BaseQuery {
+
+    private Integer id;
+
+    private List<Integer> ids;
+
+    private String name;
+
+    private Integer type;
+
+    private String url;
+
+    private String userName;
+
+    private String password;
+
+    private String configJsonStr;
+
+    private Integer loadStatus;
+
+}

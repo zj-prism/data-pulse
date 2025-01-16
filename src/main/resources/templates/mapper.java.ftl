@@ -1,7 +1,7 @@
 package ${package.Mapper};
 
 import org.apache.ibatis.annotations.Mapper;
-import top.primsnet.sync.common.mybatis.MyBaseMapper;
+import top.prims.sync.common.mybatis.MyBaseMapper;
 import ${package.Entity}.${entity};
 
 /**

@@ -6,8 +6,8 @@ import org.noear.esearchx.EsGlobal;
 import org.noear.solon.annotation.Inject;
 import org.noear.solon.test.HttpTester;
 import org.noear.solon.test.SolonTest;
-import top.primsnet.sync.DataPulseApp;
-import top.primsnet.sync.datapush.from.listener.master.to.OrderTO;
+import top.prism.sync.DataPulseApp;
+import top.prism.sync.datapush.from.listener.master.to.OrderTO;
 
 import java.io.IOException;
 import java.util.Date;

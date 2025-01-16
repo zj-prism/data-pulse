@@ -1,7 +1,7 @@
 package ${package.Parent}.vo;
 import lombok.Data;
 import io.swagger.annotations.ApiModel;
-import top.primsnet.sync.common.mybatis.base.BaseQuery;
+import top.prims.sync.common.mybatis.base.BaseQuery;
 
 /**
  * <p>
