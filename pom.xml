@@ -60,13 +60,13 @@
             <version>${mp.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.noear</groupId>
+            <artifactId>mybatis-pagehelper-solon-plugin</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
             <version>${freemarker.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.noear</groupId>
-            <artifactId>mybatis-pagehelper-solon-plugin</artifactId>
         </dependency>
         <dependency>
             <groupId>org.noear</groupId>
