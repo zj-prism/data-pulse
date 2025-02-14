@@ -6,6 +6,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.db.Entity;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import com.baomidou.mybatisplus.core.toolkit.AES;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.noear.solon.Utils;
@@ -38,6 +39,9 @@ public class MysqlDataSourceServiceImpl implements DataSourceService {
     @Inject
     DynamicDataSource dds;
 
+    @Inject("${mpw.key}")
+    private String MPMPW_KEY;
+
     /**
      * 创建数据源的动态加载json
      *
@@ -50,6 +54,13 @@ public class MysqlDataSourceServiceImpl implements DataSourceService {
         if (ObjUtil.hasEmpty(dataSourceStrTO.getBeanName(), dataSourceStrTO.getPassword(), dataSourceStrTO.getType(),
                 dataSourceStrTO.getUrl(), dataSourceStrTO.getUserName())) {
             throw new ServiceException("创建数据源动态加载json字符串失败，参数校验失败");
+        }
+        //判断链接是否需要加密
+        if (StrUtil.isNotBlank(MPMPW_KEY)){
+            //如果配置了密钥，则需要加密
+            dataSourceStrTO.setUrl("mpw:"+ AES.encrypt(dataSourceStrTO.getUrl(),MPMPW_KEY));
+            dataSourceStrTO.setUserName("mpw:"+ AES.encrypt(dataSourceStrTO.getUserName(),MPMPW_KEY));
+            dataSourceStrTO.setPassword("mpw:"+ AES.encrypt(dataSourceStrTO.getPassword(),MPMPW_KEY));
         }
         //构建动态加载数据源json串
         JSONObject configJson = new JSONObject();
