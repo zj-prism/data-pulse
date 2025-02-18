@@ -88,9 +88,9 @@ public class PubDataSourceConfigController {
         return Result.ok();
     }
 
-    @Mapping(value = "getFields/{id}",method = MethodType.GET)
+    @Mapping(value = "getFields",method = MethodType.GET)
     @ApiOperation("获取表字段")
-    public Result<List<GetDataSourceFieldsTO>> getFields(@Path("id") Integer id,String tableName){
+    public Result<List<GetDataSourceFieldsTO>> getFields(Integer id,String tableName){
         List<GetDataSourceFieldsTO> list = pubDataSourceConfigService.getFields(id,tableName);
         return Result.ok(list);
     }

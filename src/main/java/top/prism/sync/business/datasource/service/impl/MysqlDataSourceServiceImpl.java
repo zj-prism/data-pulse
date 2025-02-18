@@ -142,7 +142,7 @@ public class MysqlDataSourceServiceImpl implements DataSourceService {
      */
     @Override
     public List<GetDataSourceFieldsTO> getFields(String beanName, String tableName) {
-        if (StrUtil.isEmpty(beanName)) {
+        if (StrUtil.isEmpty(beanName) || StrUtil.isEmpty(tableName)) {
             throw new ServiceException("获取数据源字段mysql数据源失败,参数校验失败-参数不完整");
         }
         return getFieldsExec(beanName, tableName);
@@ -156,7 +156,7 @@ public class MysqlDataSourceServiceImpl implements DataSourceService {
      */
     private List<GetDataSourceFieldsTO> getFieldsExec(String beanName, String tableName) {
         //获取数据源
-        List<GetDataSourceFieldsTO> list;
+        List<GetDataSourceFieldsTO> list = new ArrayList<>();
         try {
             DataSource dataSource = dds.getTargetDataSource(beanName);
             if (ObjUtil.isEmpty(dataSource)) {
@@ -174,7 +174,9 @@ public class MysqlDataSourceServiceImpl implements DataSourceService {
                 fieldsTO.setFieldAnnotation(data.getStr("fieldAnnotation"));
                 list.add(fieldsTO);
             }
-        } finally {
+        } catch (Exception e){
+            log.error("获取数据源字段mysql数据源失败,名称：%s,异常:%s".formatted(beanName, ExceptionUtil.stacktraceToString(e)));
+        }finally {
             DynamicDsKey.setCurrent("db1");
         }
         return list;

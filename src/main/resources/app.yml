@@ -16,7 +16,7 @@ db.db1:
     jdbcUrl: jdbc:sqlite:./src/main/resources/db/datapulse.db
 #配置 mybatis-plus数据源配置加密密钥
 mpw:
-  key: "2NLLEesmmjLDT6eK"
+  key: "" #2NLLEesmmjLDT6eK
 #redis配置
 #redis.cache1:
 #  driverType: "redis" #驱动类型
