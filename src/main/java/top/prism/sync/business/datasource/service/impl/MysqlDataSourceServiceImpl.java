@@ -141,7 +141,7 @@ public class MysqlDataSourceServiceImpl implements DataSourceService {
      * @return 字段集合
      */
     @Override
-    public List<GetDataSourceFieldsTO> getFields(String beanName, String tableName) {
+    public synchronized List<GetDataSourceFieldsTO> getFields(String beanName, String tableName) {
         if (StrUtil.isEmpty(beanName) || StrUtil.isEmpty(tableName)) {
             throw new ServiceException("获取数据源字段mysql数据源失败,参数校验失败-参数不完整");
         }
@@ -154,7 +154,7 @@ public class MysqlDataSourceServiceImpl implements DataSourceService {
      * @param tableName 表名称
      * @return
      */
-    private List<GetDataSourceFieldsTO> getFieldsExec(String beanName, String tableName) {
+    private synchronized List<GetDataSourceFieldsTO> getFieldsExec(String beanName, String tableName) {
         //获取数据源
         List<GetDataSourceFieldsTO> list = new ArrayList<>();
         try {

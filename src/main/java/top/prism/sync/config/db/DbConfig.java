@@ -6,12 +6,14 @@ import org.noear.solon.annotation.Configuration;
 import org.noear.solon.annotation.Inject;
 import org.noear.solon.data.dynamicds.DynamicDataSource;
 
+import javax.sql.DataSource;
+
 
 @Configuration
 @Slf4j
 public class DbConfig {
     @Bean(value = "db1", typed = true)
-    public DynamicDataSource db1(@Inject("${db.db1}") DynamicDataSource ds) {
+    public DataSource db1(@Inject("${db.db1}") DynamicDataSource ds) {
         return ds;
     }
 }
