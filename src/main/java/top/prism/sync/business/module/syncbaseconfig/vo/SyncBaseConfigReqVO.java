@@ -4,6 +4,8 @@ import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import top.prism.sync.common.mybatis.base.BaseQuery;
 
+import java.util.List;
+
 /**
  * <p>
  * 
@@ -34,5 +36,13 @@ public class SyncBaseConfigReqVO extends BaseQuery {
 
     //状态
     private Integer status;
+
+    //来源表
+    private String fromTableName;
+
+    //目的表
+    private String toTableName;
+
+    private List<FieldBindTO> fieldsMappingArr;
 
 }

@@ -3,6 +3,8 @@ package top.prism.sync.business.module.syncbaseconfig.vo;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
+import java.util.List;
+
 /**
 * <p>
     * 
@@ -39,5 +41,14 @@ public class SyncBaseConfigResVO {
 
     //状态
     private Integer status;
+
+    //来源表
+    private String fromTableName;
+
+    //目的表
+    private String toTableName;
+
+    //字段映射
+    private List<FieldBindTO> fieldsMappingArr;
 
 }

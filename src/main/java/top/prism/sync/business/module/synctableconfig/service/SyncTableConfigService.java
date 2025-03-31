@@ -3,9 +3,10 @@ package top.prism.sync.business.module.synctableconfig.service;
 import top.prism.sync.business.module.synctableconfig.entity.SyncTableConfig;
 import top.prism.sync.business.module.synctableconfig.vo.SyncTableConfigReqVO;
 import top.prism.sync.business.module.synctableconfig.vo.SyncTableConfigResVO;
-import java.util.List;
-import top.prism.sync.common.mybatis.base.PageResult;
 import top.prism.sync.common.mybatis.base.BaseService;
+import top.prism.sync.common.mybatis.base.PageResult;
+
+import java.util.List;
 /**
  * <p>
  * 服务类
@@ -21,4 +22,6 @@ public interface SyncTableConfigService extends BaseService<SyncTableConfig> {
     void add(SyncTableConfigReqVO reqVO);
     void edit(SyncTableConfigReqVO reqVO);
     void delete(Integer id);
+
+    Integer tableBind(SyncTableConfig tableConfig);
 }

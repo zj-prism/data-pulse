@@ -65,8 +65,25 @@ public class SyncTableConfigServiceImpl extends BaseServiceImpl<SyncTableConfigM
        removeById(id);
      }
 
+    /**
+     * 表关系绑定
+     * @param tableConfig 表关系绑定数据
+     */
+    @Override
+    public Integer tableBind(SyncTableConfig tableConfig) {
+        SyncTableConfig config = this.lambdaQuery().eq(SyncTableConfig::getBaseId, tableConfig.getBaseId()).one();
+        if (ObjUtil.isEmpty(config)){
+            config = tableConfig;
+            this.save(config);
+        }else {
+            config.setFromTable(tableConfig.getFromTable());
+            config.setToTable(tableConfig.getToTable());
+            this.updateById(config);
+        }
+        return config.getId();
+    }
 
-     private QueryWrapper<SyncTableConfig> getQueryWrapper(SyncTableConfigReqVO reqVO) {
+    private QueryWrapper<SyncTableConfig> getQueryWrapper(SyncTableConfigReqVO reqVO) {
         QueryWrapper<SyncTableConfig> queryWrapper = new QueryWrapper<>();
         if (ObjUtil.isNotEmpty(reqVO)){
 

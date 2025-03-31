@@ -4,8 +4,10 @@ import cn.hutool.core.util.ObjUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.ApiOperation;
+import org.jetbrains.annotations.NotNull;
 import org.noear.solon.annotation.Component;
 import org.noear.solon.annotation.Inject;
+import org.noear.solon.data.annotation.Tran;
 import top.prism.sync.business.module.pubdatasourceconfig.service.PubDataSourceConfigService;
 import top.prism.sync.business.module.pubdatasourceconfig.vo.PubDataSourceConfigReqVO;
 import top.prism.sync.business.module.pubdatasourceconfig.vo.PubDataSourceConfigResVO;
@@ -13,12 +15,12 @@ import top.prism.sync.business.module.syncbaseconfig.convert.SyncBaseConfigConve
 import top.prism.sync.business.module.syncbaseconfig.entity.SyncBaseConfig;
 import top.prism.sync.business.module.syncbaseconfig.mapper.SyncBaseConfigMapper;
 import top.prism.sync.business.module.syncbaseconfig.service.SyncBaseConfigService;
-import top.prism.sync.business.module.syncbaseconfig.vo.DataSourcesListResVO;
-import top.prism.sync.business.module.syncbaseconfig.vo.FieldBindReqVO;
-import top.prism.sync.business.module.syncbaseconfig.vo.SyncBaseConfigReqVO;
-import top.prism.sync.business.module.syncbaseconfig.vo.SyncBaseConfigResVO;
+import top.prism.sync.business.module.syncbaseconfig.vo.*;
+import top.prism.sync.business.module.syncfieldsconfig.entity.SyncFieldsConfig;
 import top.prism.sync.business.module.syncfieldsconfig.service.SyncFieldsConfigService;
 import top.prism.sync.business.module.syncfieldsconfig.vo.SyncFieldsConfigReqVO;
+import top.prism.sync.business.module.synctableconfig.entity.SyncTableConfig;
+import top.prism.sync.business.module.synctableconfig.service.SyncTableConfigService;
 import top.prism.sync.common.enums.DataSourceLoadStatusTypeEnum;
 import top.prism.sync.common.enums.PublicStatusTypeEnum;
 import top.prism.sync.common.exception.ServiceException;
@@ -44,6 +46,9 @@ public class SyncBaseConfigServiceImpl extends BaseServiceImpl<SyncBaseConfigMap
 
     @Inject
     SyncFieldsConfigService fieldsConfigService;
+
+    @Inject
+    SyncTableConfigService tableConfigService;
 
     @Inject
     PubDataSourceConfigService dataSourceConfigService;
@@ -87,8 +92,84 @@ public class SyncBaseConfigServiceImpl extends BaseServiceImpl<SyncBaseConfigMap
      @Override
      @ApiOperation("详情")
      public SyncBaseConfigResVO detail(Integer id) {
-        return SyncBaseConfigConvert.INSTANCE.convert(getById(id));
+         SyncBaseConfigResVO convert = SyncBaseConfigConvert.INSTANCE.convert(getById(id));
+         //表与字段映射
+         SyncTableConfig config = tableConfigService.lambdaQuery().eq(SyncTableConfig::getBaseId, convert.getId()).one();
+         if (ObjUtil.isNotEmpty(config)){
+             convert.setFromTableName(config.getFromTable());
+             convert.setToTableName(config.getToTable());
+
+             List<SyncFieldsConfig> list = fieldsConfigService.lambdaQuery().eq(SyncFieldsConfig::getBaseId, config.getId()).list();
+             List<FieldBindTO> bindTOList = list.stream().map(fieldBind -> {
+                 FieldBindTO fieldBindTO = new FieldBindTO();
+                 fieldBindTO.setFromFieldName(fieldBind.getFromField());
+                 fieldBindTO.setFromFieldType(fieldBind.getFieldType());
+                 fieldBindTO.setFromFieldAnnotation(fieldBind.getTransType());
+                 fieldBindTO.setToFieldName(fieldBind.getToField());
+                 fieldBindTO.setToFieldType(fieldBind.getFieldType());
+                 fieldBindTO.setToFieldAnnotation(fieldBind.getTransType());
+                 return fieldBindTO;
+             }).toList();
+             convert.setFieldsMappingArr(bindTOList);
+         }
+        return convert;
      }
+
+
+    @Override
+    @Tran
+    @ApiOperation("编辑")
+    public void edit(SyncBaseConfigReqVO reqVO) {
+        SyncBaseConfig entity = SyncBaseConfigConvert.INSTANCE.convert(reqVO);
+        updateById(entity);
+
+        tableAndFieldBind(reqVO, entity);
+    }
+
+    /**
+     * 表与字段关系绑定
+     * @param reqVO 请求提
+     * @param entity 同步关系实体
+     */
+    private void tableAndFieldBind(SyncBaseConfigReqVO reqVO, SyncBaseConfig entity) {
+        //表绑定
+        String fromTableName = reqVO.getFromTableName();
+        String toTableName = reqVO.getToTableName();
+        List<FieldBindTO> fieldBind = reqVO.getFieldsMappingArr();
+        if (ObjUtil.hasEmpty(fieldBind,fromTableName,toTableName)){
+            return;
+        }
+        SyncTableConfig tableConfig = new SyncTableConfig();
+        tableConfig.setBaseId(entity.getId());
+        tableConfig.setFromTable(fromTableName);
+        tableConfig.setToTable(toTableName);
+        Integer tableBindId = tableConfigService.tableBind(tableConfig);
+
+        //字段绑定
+        var fieldBindList = getSyncFieldsConfigs(fieldBind, tableBindId);
+        fieldsConfigService.fieldBind(tableBindId,fieldBindList);
+    }
+
+    /**
+     * 字段绑定
+     * @param fieldBind 字段绑定请求体
+     * @param tableBindId 表绑定 id
+     * @return 字段绑定实体
+     */
+    @NotNull
+    private static ArrayList<SyncFieldsConfig> getSyncFieldsConfigs(List<FieldBindTO> fieldBind, Integer tableBindId) {
+        var fieldBindList = new ArrayList<SyncFieldsConfig>();
+        for (FieldBindTO fieldBindTO : fieldBind) {
+            SyncFieldsConfig fieldsConfig = new SyncFieldsConfig();
+            fieldsConfig.setBaseId(tableBindId);
+            fieldsConfig.setFromField(fieldBindTO.getFromFieldName());
+            fieldsConfig.setFieldType(fieldBindTO.getFromFieldType());
+            fieldsConfig.setToField(fieldBindTO.getToFieldName());
+            fieldsConfig.setFieldType(fieldBindTO.getToFieldType());
+            fieldBindList.add(fieldsConfig);
+        }
+        return fieldBindList;
+    }
 
 
      @Override
@@ -97,13 +178,7 @@ public class SyncBaseConfigServiceImpl extends BaseServiceImpl<SyncBaseConfigMap
         reqVO.setStatus(PublicStatusTypeEnum.CLOSE.getValue());
         SyncBaseConfig entity = SyncBaseConfigConvert.INSTANCE.convert(reqVO);
         save(entity);
-     }
-
-     @Override
-     @ApiOperation("编辑")
-     public void edit(SyncBaseConfigReqVO reqVO) {
-        SyncBaseConfig entity = SyncBaseConfigConvert.INSTANCE.convert(reqVO);
-        updateById(entity);
+        tableAndFieldBind(reqVO, entity);
      }
 
      @Override

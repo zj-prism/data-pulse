@@ -177,7 +177,7 @@ public class MysqlDataSourceServiceImpl implements DataSourceService {
         } catch (Exception e){
             log.error("获取数据源字段mysql数据源失败,名称：%s,异常:%s".formatted(beanName, ExceptionUtil.stacktraceToString(e)));
         }finally {
-            DynamicDsKey.setCurrent("db1");
+            DynamicDsKey.setCurrent("db_rock0");
         }
         return list;
     }

@@ -4,6 +4,7 @@ import cn.hutool.core.util.ObjUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.ApiOperation;
 import org.noear.solon.annotation.Component;
+import org.noear.solon.data.annotation.Tran;
 import top.prism.sync.business.module.syncfieldsconfig.convert.SyncFieldsConfigConvert;
 import top.prism.sync.business.module.syncfieldsconfig.entity.SyncFieldsConfig;
 import top.prism.sync.business.module.syncfieldsconfig.mapper.SyncFieldsConfigMapper;
@@ -14,6 +15,7 @@ import top.prism.sync.common.mybatis.base.BaseServiceImpl;
 import top.prism.sync.common.mybatis.base.PageResult;
 import top.prism.sync.common.mybatis.page.PageProcess;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -74,8 +76,22 @@ public class SyncFieldsConfigServiceImpl extends BaseServiceImpl<SyncFieldsConfi
        removeById(id);
      }
 
+    /**
+     * 字段绑定
+     * @param tableBindId 表绑定关系 ID
+     * @param fieldBindList 字段对应关系
+     */
+    @Tran
+    @Override
+    public void fieldBind(Integer tableBindId, ArrayList<SyncFieldsConfig> fieldBindList) {
+        List<SyncFieldsConfig> list = this.lambdaQuery().eq(SyncFieldsConfig::getBaseId, tableBindId).list();
+        if (ObjUtil.isNotEmpty(list)){
+            this.removeBatchByIds(list.stream().map(SyncFieldsConfig::getId).toList());
+        }
+        this.saveBatch(fieldBindList);
+    }
 
-     private QueryWrapper<SyncFieldsConfig> getQueryWrapper(SyncFieldsConfigReqVO reqVO) {
+    private QueryWrapper<SyncFieldsConfig> getQueryWrapper(SyncFieldsConfigReqVO reqVO) {
         QueryWrapper<SyncFieldsConfig> queryWrapper = new QueryWrapper<>();
         if (ObjUtil.isNotEmpty(reqVO)){
 

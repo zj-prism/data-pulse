@@ -6,6 +6,7 @@ import top.prism.sync.business.module.syncfieldsconfig.vo.SyncFieldsConfigResVO;
 import top.prism.sync.common.mybatis.base.BaseService;
 import top.prism.sync.common.mybatis.base.PageResult;
 
+import java.util.ArrayList;
 import java.util.List;
 /**
  * <p>
@@ -23,4 +24,6 @@ public interface SyncFieldsConfigService extends BaseService<SyncFieldsConfig> {
     void addAll(List<SyncFieldsConfigReqVO> reqVO);
     void edit(SyncFieldsConfigReqVO reqVO);
     void delete(Integer id);
+
+    void fieldBind(Integer tableBindId, ArrayList<SyncFieldsConfig> fieldBindList);
 }
