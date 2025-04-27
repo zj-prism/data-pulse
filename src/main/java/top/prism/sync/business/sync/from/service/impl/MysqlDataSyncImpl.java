@@ -68,8 +68,8 @@ public class MysqlDataSyncImpl implements DataSyncService {
         BinlogClientConfig clientConfig = new BinlogClientConfig();
         clientConfig.setHost(host);
         clientConfig.setPort(portPart);
-        clientConfig.setUsername("root");
-        clientConfig.setPassword("Jiaqian0051.");
+        clientConfig.setUsername(fromDataSource.getUserName());
+        clientConfig.setPassword(fromDataSource.getPassword());
         clientConfig.setServerId(syncConfigId);
 //        RedisConfig redisConfig = new RedisConfig();
 //        redisConfig.setHost("127.0.0.1");
