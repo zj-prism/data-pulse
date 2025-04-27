@@ -8,6 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import org.noear.solon.annotation.Component;
 import org.noear.solon.annotation.Inject;
 import org.noear.solon.data.annotation.Tran;
+import top.prism.sync.business.module.pubdatasourceconfig.entity.PubDataSourceConfig;
 import top.prism.sync.business.module.pubdatasourceconfig.service.PubDataSourceConfigService;
 import top.prism.sync.business.module.pubdatasourceconfig.vo.PubDataSourceConfigReqVO;
 import top.prism.sync.business.module.pubdatasourceconfig.vo.PubDataSourceConfigResVO;
@@ -21,7 +22,9 @@ import top.prism.sync.business.module.syncfieldsconfig.service.SyncFieldsConfigS
 import top.prism.sync.business.module.syncfieldsconfig.vo.SyncFieldsConfigReqVO;
 import top.prism.sync.business.module.synctableconfig.entity.SyncTableConfig;
 import top.prism.sync.business.module.synctableconfig.service.SyncTableConfigService;
+import top.prism.sync.business.sync.from.service.DataSyncServiceContext;
 import top.prism.sync.common.enums.DataSourceLoadStatusTypeEnum;
+import top.prism.sync.common.enums.DataSourceTypeEnum;
 import top.prism.sync.common.enums.PublicStatusTypeEnum;
 import top.prism.sync.common.exception.ServiceException;
 import top.prism.sync.common.mybatis.base.BaseServiceImpl;
@@ -52,6 +55,10 @@ public class SyncBaseConfigServiceImpl extends BaseServiceImpl<SyncBaseConfigMap
 
     @Inject
     PubDataSourceConfigService dataSourceConfigService;
+
+    @Inject
+    DataSyncServiceContext dataSyncServiceContext;
+
 
     @Override
     @ApiOperation("分页")
@@ -255,6 +262,14 @@ public class SyncBaseConfigServiceImpl extends BaseServiceImpl<SyncBaseConfigMap
         //TODO 后续需要增加打开后开启实时同步工作    ---- 不同类型有不同的开启操作
         entity.setStatus(PublicStatusTypeEnum.OPEN.getValue());
         updateById(entity);
+
+        //开启同步监听
+        Integer fromId = entity.getFromId();
+        PubDataSourceConfig pubDataSourceConfig = dataSourceConfigService.getById(fromId);
+        Integer type = pubDataSourceConfig.getType();
+        if (ObjUtil.equal(type, DataSourceTypeEnum.MYSQL.getValue())){
+            dataSyncServiceContext.getService("MysqlDataSyncImpl").createDataListener(id);
+        }
     }
 
     @Override
